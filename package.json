@@ -1,0 +1,31 @@
+{
+  "name": "angrplayr",
+  "description": "angrplayr",
+  "version": "0.0.1",
+  "author": {
+    "name": "Zac Anger",
+    "email": "zac@zacanger.com",
+    "url": "http://zacanger.com"
+  },
+  "license": "WTFPL",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index",
+    "test": ""
+  },
+  "homepage": "https://github.com/zacanger/angrplayr#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zacanger/angrplayr.git"
+  },
+  "bugs": "https://github.com/zacanger/angrplayr/issues",
+  "keywords": [
+    "",
+    "angrplayr"
+  ],
+  "dependencies": {},
+  "devDependencies": {},
+  "engines": {
+    "node": ">=6.0.0"
+  }
+}
