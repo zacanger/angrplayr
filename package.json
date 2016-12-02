@@ -32,7 +32,10 @@
     "terminal",
     "zacanger"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "lame": "^1.2.4",
+    "speaker": "^0.3.0"
+  },
   "devDependencies": {},
   "engines": {
     "node": ">=6.0.0"
