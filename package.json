@@ -1,6 +1,6 @@
 {
   "name": "angrplayr",
-  "description": "angrplayr",
+  "description": "Console music player in Node.",
   "version": "0.0.1",
   "author": {
     "name": "Zac Anger",
@@ -9,6 +9,11 @@
   },
   "license": "WTFPL",
   "main": "index.js",
+  "preferGlobal": true,
+  "bin": {
+    "angrplayr": "./index.js",
+    "ap": "./index.js"
+  },
   "scripts": {
     "start": "node index",
     "test": ""
@@ -20,8 +25,12 @@
   },
   "bugs": "https://github.com/zacanger/angrplayr/issues",
   "keywords": [
-    "",
-    "angrplayr"
+    "angrplayr",
+    "audio",
+    "console",
+    "music",
+    "terminal",
+    "zacanger"
   ],
   "dependencies": {},
   "devDependencies": {},
