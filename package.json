@@ -33,6 +33,7 @@
     "zacanger"
   ],
   "dependencies": {
+    "blessed": "^0.1.81",
     "lame": "^1.2.4",
     "speaker": "^0.3.0"
   },
