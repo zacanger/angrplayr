@@ -12,6 +12,8 @@
 
 Currently only works on one file at a time.
 
+If you send it more than one file, it'll play them simultaenously.
+
 Requires libasound2-dev on Debian-based distros.
 
 Totally untested on Windows.
@@ -23,6 +25,8 @@ A console music player for Node, eventually.
 ### Roadmap:
 
 * Initial goal is to achieve some of the basic functionality of mplayer.
+  * Keypresses -- play, pause, stop, next, prev, volume up and down
+  * Send a list of file from process.argv, queue all
 * Eventual goals are a Blessed-based interface somewhat similar to cmus or MOC.
 * Areas to explore:
   * Being a blessed interface over mplayer
