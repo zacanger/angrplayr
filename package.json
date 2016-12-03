@@ -1,7 +1,7 @@
 {
   "name": "angrplayr",
   "description": "Console music player in Node.",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "author": {
     "name": "Zac Anger",
     "email": "zac@zacanger.com",
@@ -15,8 +15,7 @@
     "ap": "./index.js"
   },
   "scripts": {
-    "start": "node index",
-    "test": ""
+    "start": "node index"
   },
   "homepage": "https://github.com/zacanger/angrplayr#readme",
   "repository": {
