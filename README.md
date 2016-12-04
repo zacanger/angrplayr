@@ -1,5 +1,7 @@
 # angrplayr
 
+A music player for the console, in Node.
+
 --------
 
 ### Installation:
@@ -8,19 +10,15 @@
 
 ### Usage:
 
-`angrplayr file.mp3`, also the `ap` shortcut.
+`angrplayr file.mp3`, or `ap file.mp3`
 
-Currently only works on one file at a time.
+### Current limitations:
 
-If you send it more than one file, it'll play them simultaenously.
-
-Requires libasound2-dev on Debian-based distros.
-
-Totally untested on Windows.
-
-### What:
-
-A console music player for Node, eventually.
+* Only works with one file at a time.
+  * If you send it more than one, it'll play them simultaenously.
+* Only works with MP3s. If you give it a WAV or whatever, it'll blow up.
+* Requires asound (`libasound2-dev` on Debian-based distros).
+* Who knows what it does on Windows? Not me.
 
 ### Roadmap:
 
