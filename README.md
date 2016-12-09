@@ -22,13 +22,12 @@ A music player for the console, in Node.
 
 ### Roadmap:
 
-* Initial goal is to achieve some of the basic functionality of mplayer.
-  * Keypresses -- play, pause, stop, next, prev, volume up and down
-  * ID3
-  * Other filetypes
-* Eventual goals are a Blessed-based interface somewhat similar to cmus or MOC.
+* Keypresses -- play, pause, stop, next, prev, volume up and down
+* ID3
+* Other filetypes
+* Interface:
+  * Eventual goals are a Blessed-based interface somewhat similar to cmus or MOC.
 * Areas to explore:
-  * Being a blessed interface over mplayer
   * Audio libraries that don't require specific headers/don't combile native addons on installation
   * Why Hyper (the terminal) doesn't do so well with blessed
   * Which types of keybinds would be least surprising for users (vi vs arrows, etc.)
