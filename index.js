@@ -1,16 +1,21 @@
 #!/usr/bin/env node
 
-const
-  fs = require('fs')
-, Lame = require('lame')
-, path = require('path')
-, Speaker = require('speaker')
-, args = process.argv.slice(2)
-, getFiles = (list) => list.map(item => path.resolve(item))
-, theFiles = getFiles(args)
+const StreamPlayer = require('stream-player')
+const player = new StreamPlayer()
+const { parse, resolve } = require('path')
+const args = process.argv.slice(2)
+if (!args || (args && !args.length)) process.exit(0)
+const getFiles = (list) => list.map((el) => resolve(el))
+const theFiles = getFiles(args)
 
-theFiles.forEach(file => {
-  fs.createReadStream(file)
-  .pipe(new Lame.Decoder())
-  .pipe(new Speaker())
+const getBasename = (a) => parse(a).base
+
+theFiles.forEach((file) => {
+  player.add(file, getBasename(file))
+})
+
+player.play()
+
+player.on('play start', () => {
+  console.log(`>> ${player.nowPlaying().track}`)
 })
