@@ -33,10 +33,5 @@ A music player for the console, in Node.
   * Which types of keybinds would be least surprising for users (vi vs arrows, etc.)
   * File manangement/exploration vs text playlists and a single queue
 
-### Contributors:
-
-* [A-Reum Jung](https://github.com/princessareum)
-* [Zac Anger](https://github.com/zacanger)
-
 ### License:
 [WTFPL](LICENSE.md)
