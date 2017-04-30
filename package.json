@@ -1,7 +1,7 @@
 {
   "name": "angrplayr",
   "description": "Console music player in Node.",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "author": {
     "name": "Zac Anger",
     "email": "zac@zacanger.com",
@@ -34,7 +34,8 @@
     "zacanger"
   ],
   "dependencies": {
-    "stream-player": "^0.3.0"
+    "stream-player": "0.3.0",
+    "zeelib": "0.7.29"
   },
   "devDependencies": {},
   "engines": {
