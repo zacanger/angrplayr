@@ -6,6 +6,7 @@ import { Grid, Tree, Table } from 'react-blessed-contrib'
 import exit from 'zeelib/lib/exit'
 import promisify from 'zeelib/lib/promisify'
 import dir from 'zeelib/lib/dir'
+import getCols from 'zeelib/lib/get-terminal-columns'
 
 const explorer = {
   name: '/',
@@ -58,7 +59,10 @@ const loadChildren = async (self, cb) => {
 }
 
 class App extends Component {
-  state = { tableData: [] }
+  state = {
+    tableData: [],
+    cols: 0
+  }
 
   componentDidMount () {
     this.props.screen.key([ 'tab' ], (ch, key) => {
@@ -72,6 +76,7 @@ class App extends Component {
     })
     this.refs.tree.focus()
     loadChildren(explorer, this._reRender)
+    this.setState({ cols: getCols() / 2 })
   }
 
   _reRender = () => {
@@ -82,24 +87,8 @@ class App extends Component {
   _onSelect = async (node) => {
     loadChildren(node, this._reRender)
     const path = node.getPath(node) || '/'
-    let data = []
-
-    // Add data to right array
-    data.push([ path ])
-    data.push([ '' ])
-    try {
-      // Add results
-      data = data
-        .concat(JSON.stringify(await promisify(fs.lstat)(path), null, 2)
-          .split('\n')
-          .map((e) =>
-            [ e ]))
-      this.setState({ tableData: data })
-    } catch (e) {
-      this.setState({ tableData: [
-        [ e.toString() ]
-      ] })
-    }
+    const data = [ [ path ], [ '' ], [ path ] ]
+    this.setState({ tableData: data })
   }
 
   render () {
@@ -135,7 +124,7 @@ class App extends Component {
             fg: 'green',
             label: 'Playing',
             columnWidth: [
-              24, 10, 10
+              20, 10, 10
             ],
             data: {
               headers: [ 'List' ],
