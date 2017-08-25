@@ -15,9 +15,12 @@
     "ap": "./index.js"
   },
   "scripts": {
+    "build": "babel src/ -d lib/",
+    "demo": "babel-node src/index.js",
+    "demo-ui": "babel-node src/ui-test.js",
     "start": "node index",
     "test": "npm run test:lint",
-    "test:lint": "eslint -c .eslintrc.json index.js"
+    "test:lint": "eslint -c .eslintrc.json src"
   },
   "homepage": "https://github.com/zacanger/angrplayr#readme",
   "repository": {
@@ -36,16 +39,28 @@
     "zacanger"
   ],
   "dependencies": {
+    "blessed": "0.1.81",
+    "react": "0.14.9",
+    "react-blessed": "0.1.8",
+    "react-blessed-contrib": "0.1.2",
     "stream-player": "0.3.0",
-    "zeelib": "3.0.4"
+    "zeelib": "3.0.6"
   },
   "devDependencies": {
+    "babel-cli": "6.26.0",
+    "babel-core": "6.26.0",
     "babel-eslint": "7.2.3",
+    "babel-plugin-transform-class-properties": "6.24.1",
+    "babel-plugin-transform-export-extensions": "6.22.0",
+    "babel-plugin-transform-object-rest-spread": "6.26.0",
+    "babel-preset-env": "1.6.0",
+    "babel-preset-react": "6.24.1",
     "eslint": "4.5.0",
     "eslint-config-jane": "0.5.2",
     "eslint-plugin-babel": "4.1.2",
     "eslint-plugin-node": "5.1.1",
     "eslint-plugin-promise": "3.5.0",
+    "eslint-plugin-react": "7.3.0",
     "eslint-plugin-unicorn": "2.1.2"
   },
   "engines": {
