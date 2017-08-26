@@ -9,11 +9,6 @@ import resolveFiles from 'zeelib/lib/resolve-files'
 const player = new StreamPlayer()
 const args = getArgs()
 
-if (module.parent) {
-  console.log('please use the `ap` command!')
-  exit(1)
-}
-
 if (!args || (args && !args.length)) {
   console.log('usage: ap somefile.mp3')
   exit(0)

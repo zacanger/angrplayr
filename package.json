@@ -9,6 +9,10 @@
   },
   "license": "WTFPL",
   "main": "index.js",
+  "files": [
+    "lib",
+    "index.js"
+  ],
   "preferGlobal": true,
   "bin": {
     "angrplayr": "./index.js",
