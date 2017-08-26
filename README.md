@@ -22,16 +22,13 @@ A music player for the console, in Node.
 
 ### Roadmap:
 
-* Keypresses -- play, pause, stop, next, prev, volume up and down
+* Remove streamplayer stuff, and work as a frontend to mplayer instead
+* Keypresses -- play, pause, stop, next, prev, add, remove, save volume up and down, vim-like
 * ID3
-* Other filetypes
-* Interface:
-  * Eventual goals are a Blessed-based interface somewhat similar to cmus or MOC.
-* Areas to explore:
-  * Audio libraries that don't require specific headers/don't combile native addons on installation
-  * Why Hyper (the terminal) doesn't do so well with blessed
-  * Which types of keybinds would be least surprising for users (vi vs arrows, etc.)
-  * File manangement/exploration vs text playlists and a single queue
+* Other filetypes (this will come along with using mplayer)
+* Blessed-based interface similar to MOC
+* Saving (m3u files)
 
 ### License:
+
 [WTFPL](LICENSE.md)

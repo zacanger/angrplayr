@@ -11,16 +11,11 @@ import getCols from 'zeelib/lib/get-terminal-columns'
 const explorer = {
   name: '/',
   extended: true,
-  // Custom function used to recursively determine the node path
-  getPath: (self) => {
+  getPath: (self) =>
+    // Custom function used to recursively determine the node path
     // If we don't have any parent, we are at tree root, so return the base case
-    if (!self.parent) {
-      return ''
-    }
-
-    // Get the parent node path and add this node name
-    return self.parent.getPath(self.parent) + '/' + self.name
-  }
+    // Otherwise get the parent node path and add this node name
+    !self.parent ? '' : self.parent.getPath(self.parent) + '/' + self.name
 }
 
 const loadChildren = async (self, cb) => {
@@ -139,12 +134,40 @@ class App extends Component {
 
 const screen = blessed.screen()
 
-screen.key(
-  [ 'escape', 'q', 'C-c' ],
-  (ch, key) => {
-    dir({ ch, key })
-    return exit()
-  }
-)
+// immediately play song
+screen.key([ 'enter' ], () => { })
+
+// add song or directory to playlist on right pane
+screen.key([ 'a' ], () => { })
+
+// remove song from playlist on right pane
+screen.key([ 'd' ], () => { })
+
+// save to a playlist file
+screen.key([ 's' ], () => { })
+
+// load from a playlist file (overwriting current playlist)
+screen.key([ 'o' ], () => { })
+
+// volume up
+screen.key([ 'u' ], () => { })
+
+// volume down
+screen.key([ 'y' ], () => { })
+
+// prev in playlist
+screen.key([ 'b' ], () => { })
+
+// next in playlist
+screen.key([ 'n' ], () => { })
+
+// map to arrows
+screen.key([ 'h', 'j', 'k', 'l' ], () => { })
+
+// pause, resume
+screen.key([ 'space' ], () => { })
+
+// quit
+screen.key([ 'q', 'C-c' ], () => { exit() })
 
 render(<App screen={screen} />, screen)
