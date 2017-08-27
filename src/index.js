@@ -10,6 +10,8 @@ import getCols from 'zeelib/lib/get-terminal-columns'
 import isFile from 'zeelib/lib/is-file'
 import { any } from 'prop-types'
 
+const lstat = promisify(fs.lstat)
+const readdir = promisify(fs.readdir)
 const player = new MPlayer()
 
 const explorer = {
@@ -27,14 +29,14 @@ const loadChildren = async (self, cb) => {
   try {
     let selfPath = self.getPath(self)
     // List files in this directory
-    let children = await promisify(fs.readdir)(selfPath + '/')
+    let children = await readdir(selfPath + '/')
 
     // childrenContent is a property filled with self.children() result
     // on tree generation (tree.setData() call)
     for (let child in children) { // eslint-disable-line guard-for-in
       child = children[child]
       const completePath = selfPath + '/' + child
-      if ((await promisify(fs.lstat)(completePath)).isDirectory()) {
+      if ((await lstat(completePath)).isDirectory()) {
         // If it's a directory we generate the child with the children generation function
         result[child] = {
           name: child,
