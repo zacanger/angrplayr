@@ -8,25 +8,23 @@ A music player for the console, in Node.
 
 `npm i -g angrplayr`
 
+`angrplayr` uses [mplayer](http://www.mplayerhq.hu/design7/dload.html) under the
+hood, so you'll need that installed as well.
+
 ### Usage:
 
-`angrplayr file.mp3`, or `ap file.mp3`
+`angrplayr` (or `ap` for short).
 
-`ap 1.mp3 2.mp3 3.mp3`
+This will open a file explorer in your terminal. Use arrows to find an audio
+file, and hit `enter` to play.
 
-### Current limitations:
-
-* Only works with MP3s. If you give it a WAV or whatever, it'll blow up.
-* Requires asound (`libasound2-dev` on Debian-based distros).
-* Who knows what it does on Windows? Not me.
+**Important** This probably can't work on Windows. Sorry.
 
 ### Roadmap:
 
-* Remove streamplayer stuff, and work as a frontend to mplayer instead
 * Keypresses -- play, pause, stop, next, prev, add, remove, save volume up and down, vim-like
 * ID3
-* Other filetypes (this will come along with using mplayer)
-* Blessed-based interface similar to MOC
+* Improve UI, especially the right pane
 * Saving (m3u files)
 
 ### License:
