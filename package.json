@@ -44,6 +44,8 @@
     "zacanger"
   ],
   "dependencies": {
+    "babel-polyfill": "6.26.0",
+    "babel-register": "6.26.0",
     "blessed": "0.1.81",
     "mplayer": "2.1.0",
     "prop-types": "15.5.10",
