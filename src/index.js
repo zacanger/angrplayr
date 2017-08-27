@@ -31,5 +31,5 @@ player.on('play end', () => {
 })
 
 player.on('song added', (a) => {
-  console.log(`${added} ${a}`)
+  console.log(`added ${a}`)
 })

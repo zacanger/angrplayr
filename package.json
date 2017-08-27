@@ -22,6 +22,8 @@
     "build": "babel src/ -d lib/",
     "demo": "babel-node src/index.js",
     "demo-ui": "babel-node src/ui.js",
+    "prebuild": "npm test",
+    "preversion": "npm run build",
     "start": "node index",
     "test": "npm run test:lint",
     "test:lint": "eslint -c .eslintrc.json src"
