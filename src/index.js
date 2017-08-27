@@ -18,10 +18,12 @@ const explorer = {
   name: '/',
   extended: true,
   getPath: (self) =>
-    // Custom function used to recursively determine the node path
+    // Recursively determine the node path
     // If we don't have any parent, assume process.cwd()
     // Otherwise get the parent node path and add this node name
-    !self.parent ? process.cwd() : self.parent.getPath(self.parent) + '/' + self.name
+    !self.parent
+      ? process.cwd()
+      : self.parent.getPath(self.parent) + '/' + self.name
 }
 
 const loadChildren = async (self, cb) => {
@@ -70,22 +72,22 @@ class App extends Component {
   }
 
   componentDidMount () {
-    this.props.screen.key([ 'tab' ], () => {
-      const tree = this.refs.tree
-      const table = this.refs.table
-      if (this.props.screen.focused === tree.rows) {
+    const { screen } = this.props
+    screen.key([ 'tab' ], () => {
+      const { tree, table } = this
+      if (screen.focused === tree.rows) {
         table.focus()
       } else {
         tree.focus()
       }
     })
-    this.refs.tree.focus()
+    this.tree.focus()
     loadChildren(explorer, this._reRender)
     this.setState({ cols: getCols() / 2 })
   }
 
   _reRender = () => {
-    this.refs.tree.setData(explorer)
+    this.tree.setData(explorer)
     this.props.screen.render()
   }
 
@@ -99,12 +101,16 @@ class App extends Component {
     this.setState({ tableData: data })
   }
 
+  setRef = (name) => (ref) => {
+    this[name] = ref
+  }
+
   render () {
     return (
       <Grid rows={1} cols={2}>
         <Tree
           key="tree"
-          ref="tree"
+          ref={this.setRef('tree')}
           row={0}
           col={0}
           rowSpan={1}
@@ -122,7 +128,7 @@ class App extends Component {
         />
         <Table
           key="table"
-          ref="table"
+          ref={this.setRef('table')}
           row={0}
           col={1}
           rowSpan={1}
