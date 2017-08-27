@@ -24,6 +24,7 @@ file, and hit `enter` to play.
 
 * Keypresses -- play, pause, stop, next, prev, add, remove, save volume up and down, vim-like
 * ID3
+* Unicode support
 * Improve UI, especially the right pane
 * Saving (m3u files)
 
