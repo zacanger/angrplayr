@@ -21,7 +21,6 @@
   "scripts": {
     "build": "babel src/ -d lib/",
     "demo": "babel-node src/index.js",
-    "demo-ui": "babel-node src/ui.js",
     "prebuild": "npm test",
     "preversion": "npm run build",
     "start": "node index",
@@ -46,11 +45,12 @@
   ],
   "dependencies": {
     "blessed": "0.1.81",
+    "mplayer": "2.1.0",
+    "prop-types": "15.5.10",
     "react": "0.14.9",
     "react-blessed": "0.1.8",
     "react-blessed-contrib": "0.1.2",
-    "stream-player": "0.3.0",
-    "zeelib": "3.0.6"
+    "zeelib": "3.0.7"
   },
   "devDependencies": {
     "babel-cli": "6.26.0",
