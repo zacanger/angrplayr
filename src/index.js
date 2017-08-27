@@ -1,5 +1,6 @@
 import fs from 'fs'
 import MPlayer from 'mplayer'
+import mime from 'mime'
 import React, { Component } from 'react'
 import blessed from 'blessed'
 import { render } from 'react-blessed'
@@ -13,6 +14,7 @@ import { any } from 'prop-types'
 const lstat = promisify(fs.lstat)
 const readdir = promisify(fs.readdir)
 const player = new MPlayer()
+const isAudio = (s) => /audio/i.test(mime.lookup(s))
 
 const explorer = {
   name: '/',
@@ -95,7 +97,7 @@ class App extends Component {
     loadChildren(node, this._reRender)
     const path = node.getPath(node) || '/'
     const data = [ [ path ], [ '' ], [ path ] ]
-    if (isFile(path)) {
+    if (isFile(path) && isAudio(path)) {
       player.openFile(path)
     }
     this.setState({ tableData: data })
