@@ -84,17 +84,17 @@ class App extends Component {
       }
     })
     this.tree.focus()
-    loadChildren(explorer, this._reRender)
+    loadChildren(explorer, this.reRender)
     this.setState({ cols: getCols() / 2 })
   }
 
-  _reRender = () => {
+  reRender = () => {
     this.tree.setData(explorer)
     this.props.screen.render()
   }
 
-  _onSelect = async (node) => {
-    loadChildren(node, this._reRender)
+  onSelect = async (node) => {
+    loadChildren(node, this.reRender)
     const path = node.getPath(node) || '/'
     const data = [ [ path ], [ '' ], [ path ] ]
     if (isFile(path) && isAudio(path)) {
@@ -125,7 +125,7 @@ class App extends Component {
               lines: true
             },
             label: 'Tree',
-            onSelect: this._onSelect
+            onSelect: this.onSelect
           }}
         />
         <Table
