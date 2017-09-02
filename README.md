@@ -12,7 +12,11 @@ A music player for the console, in Node.
 hood, so you'll need that installed as well. This module will fail to install if
 you don't have `mplayer` in your path somewhere.
 
-**Important**: This will probably never work on Windows. Sorry.
+#### Important
+
+* This will probably never work on Windows. Sorry.
+* `angrplayr` requires at least Node version 8, because it uses some async
+  functions.
 
 ### Usage:
 

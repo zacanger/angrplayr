@@ -1,7 +1,7 @@
 {
   "presets": [
     "react",
-    "env"
+    "latest-minimal"
   ],
   "plugins": [
     "transform-export-extensions",
