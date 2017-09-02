@@ -33,6 +33,7 @@ file, and hit `enter` to play.
 * Improve UI, especially the right pane
 * Saving (m3u files)
 * Themes? (At least also support light terminals)
+* Seek
 
 ### License:
 
