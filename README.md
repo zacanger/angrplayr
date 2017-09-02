@@ -36,6 +36,7 @@ file, and hit `enter` to play.
 * Saving to/loading from m3u files
 * Themes? (At least also support light terminals)
 * Keys -- stop, next, prev, add, remove, save, vim-like, change order in playlist
+* File browsing above cwd
 
 ### License:
 
