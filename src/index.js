@@ -67,13 +67,14 @@ class App extends Component {
     super(props)
 
     this.state = {
-      tableData: [],
       cols: 0,
       paused: false,
-      volume: 50
+      volume: 50,
+      tableData: []
     }
 
     this.player = new MPlayer()
+    // this.player.on('stop', this.advance)
   }
 
   static propTypes = {
@@ -85,7 +86,6 @@ class App extends Component {
 
     // set up key handlers
     screen.key([ 'q', 'C-c' ], this.quit)
-    screen.key([ 'tab' ], this.toggleFocus)
     screen.key([ 'p' ], this.togglePause)
     screen.key([ ',' ], this.volumeDown)
     screen.key([ '.' ], this.volumeUp)
@@ -100,17 +100,12 @@ class App extends Component {
     this.setState({ cols: getCols() / 2 })
   }
 
-  quit = () => {
-    exit()
+  advance = () => {
+
   }
 
-  toggleFocus = () => {
-    const { tree, table, props } = this
-    if (props.screen.focused === tree.rows) {
-      table.focus()
-    } else {
-      tree.focus()
-    }
+  quit = () => {
+    exit()
   }
 
   togglePause = () => {
@@ -156,13 +151,13 @@ class App extends Component {
 
   render () {
     return (
-      <Grid rows={1} cols={2}>
+      <Grid rows={5} cols={1}>
         <Tree
           key="tree"
           ref={this.setRef('tree')}
           row={0}
           col={0}
-          rowSpan={1}
+          rowSpan={4}
           colSpan={1}
           options={{
             style: {
@@ -171,28 +166,21 @@ class App extends Component {
             template: {
               lines: true
             },
-            label: 'Tree',
+            label: 'AngrPlayr',
             onSelect: this.onSelect
           }}
         />
         <Table
-          key="table"
           ref={this.setRef('table')}
-          row={0}
-          col={1}
-          rowSpan={1}
-          colSpan={1}
+          key="table"
+          row={5}
+          col={0}
           options={{
             keys: true,
             fg: 'green',
             label: 'Playing',
-            columnWidth: [
-              20, 10, 10
-            ],
-            data: {
-              headers: [ 'List' ],
-              data: this.state.tableData
-            }
+            data: { headers: [], data: this.state.tableData },
+            columnWidth: [ 20, 10, 10 ]
           }}
         />
       </Grid>

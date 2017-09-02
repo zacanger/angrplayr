@@ -57,9 +57,7 @@ just want to play all the files in a directory, in order.
 * Seek
 * Improve UI:
   * Themes? (At least also support light terminals)
-  * Remove the right pane
-  * Display metadata (ID3)
-  * Display progress in file
+  * Add bottom pane with metadata (id3?) and playing progress
 
 ### License
 
