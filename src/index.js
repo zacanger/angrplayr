@@ -204,7 +204,4 @@ class App extends Component {
 
 const screen = blessed.screen({ fullUnicode: true, smartCSR: true })
 
-// quit
-screen.key([ 'q', 'C-c' ], () => { exit() })
-
 render(<App screen={screen} />, screen)
