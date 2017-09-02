@@ -100,13 +100,13 @@ class App extends Component {
       this.setState({ paused: !this.state.paused })
     })
 
-    screen.key([ 'y' ], () => {
+    screen.key([ ',' ], () => {
       const newVol = this.state.volume - 1
       this.player.volume(newVol)
       this.setState({ volume: newVol })
     })
 
-    screen.key([ 'u' ], () => {
+    screen.key([ '.' ], () => {
       const newVol = this.state.volume + 1
       this.player.volume(newVol)
       this.setState({ volume: newVol })
