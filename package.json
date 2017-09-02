@@ -21,8 +21,8 @@
   "scripts": {
     "build": "babel src/ -d lib/",
     "demo": "babel-node src/index.js",
-    "postinstall": "./check-mplayer.sh",
     "prebuild": "npm test",
+    "preinstall": "hash mplayer 2>/dev/null || { echo >&2 'Please install mplayer.' ; exit 1 ; }",
     "preversion": "npm run build",
     "start": "node index",
     "test": "npm run test:lint",
