@@ -70,7 +70,7 @@ class App extends Component {
       tableData: [],
       cols: 0,
       paused: false,
-      volume: 25
+      volume: 50
     }
 
     this.player = new MPlayer()
@@ -148,6 +148,7 @@ class App extends Component {
     const data = [ [ path ], [ '' ], [ path ] ]
     if (isFile(path) && isAudio(path)) {
       this.player.openFile(path)
+      this.player.volume(this.state.volume)
     }
     this.setState({ tableData: data })
   }
