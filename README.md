@@ -20,14 +20,16 @@ file, and hit `enter` to play.
 
 #### Keys:
 
-* `enter`: immediately play selected file
+* `enter` or `space`: immediately play selected file
 * `p`: toggle paused/playing
+* `u`: volume up
+* `y`: volume down
 
 **Important** This probably can't work on Windows. Sorry.
 
 ### Roadmap:
 
-* Keypresses -- stop, next, prev, add, remove, save volume up and down, vim-like
+* Keypresses -- stop, next, prev, add, remove, save, vim-like
 * ID3
 * Unicode support
 * Improve UI, especially the right pane

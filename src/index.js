@@ -13,7 +13,6 @@ import { any } from 'prop-types'
 
 const lstat = promisify(fs.lstat)
 const readdir = promisify(fs.readdir)
-const player = new MPlayer()
 const isAudio = (s) => /audio/i.test(mime.lookup(s))
 
 const explorer = {
@@ -64,10 +63,17 @@ const loadChildren = async (self, cb) => {
 }
 
 class App extends Component {
-  state = {
-    tableData: [],
-    cols: 0,
-    paused: false
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      tableData: [],
+      cols: 0,
+      paused: false,
+      volume: 30
+    }
+
+    this.player = new MPlayer()
   }
 
   static propTypes = {
@@ -87,11 +93,23 @@ class App extends Component {
 
     screen.key([ 'p' ], () => {
       if (this.state.paused) {
-        player.play()
+        this.player.play()
       } else {
-        player.pause()
+        this.player.pause()
       }
       this.setState({ paused: !this.state.paused })
+    })
+
+    screen.key([ 'y' ], () => {
+      const newVol = this.state.volume - 1
+      this.player.volume(newVol)
+      this.setState({ volume: newVol })
+    })
+
+    screen.key([ 'u' ], () => {
+      const newVol = this.state.volume + 1
+      this.player.volume(newVol)
+      this.setState({ volume: newVol })
     })
 
     this.tree.focus()
@@ -109,7 +127,7 @@ class App extends Component {
     const path = node.getPath(node) || '/'
     const data = [ [ path ], [ '' ], [ path ] ]
     if (isFile(path) && isAudio(path)) {
-      player.openFile(path)
+      this.player.openFile(path)
     }
     this.setState({ tableData: data })
   }
@@ -180,12 +198,6 @@ const screen = blessed.screen()
 
 // load from a playlist file (overwriting current playlist)
 // screen.key([ 'o' ], () => { })
-
-// volume up
-// screen.key([ 'u' ], () => { })
-
-// volume down
-// screen.key([ 'y' ], () => { })
 
 // prev in playlist
 // screen.key([ 'b' ], () => { })
