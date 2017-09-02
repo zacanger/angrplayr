@@ -25,8 +25,8 @@ file, and hit `enter` to play.
 
 * `enter` or `space`: immediately play selected file
 * `p`: toggle paused/playing
-* `,`: volume up
-* `.`: volume down
+* `.`: volume up
+* `,`: volume down
 
 ### Roadmap:
 
