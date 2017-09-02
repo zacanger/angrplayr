@@ -70,7 +70,7 @@ class App extends Component {
       tableData: [],
       cols: 0,
       paused: false,
-      volume: 30
+      volume: 25
     }
 
     this.player = new MPlayer()
@@ -82,39 +82,59 @@ class App extends Component {
 
   componentDidMount () {
     const { screen } = this.props
-    screen.key([ 'tab' ], () => {
-      const { tree, table } = this
-      if (screen.focused === tree.rows) {
-        table.focus()
-      } else {
-        tree.focus()
-      }
-    })
 
-    screen.key([ 'p' ], () => {
-      if (this.state.paused) {
-        this.player.play()
-      } else {
-        this.player.pause()
-      }
-      this.setState({ paused: !this.state.paused })
-    })
+    // set up key handlers
+    screen.key([ 'q', 'C-c' ], this.quit)
+    screen.key([ 'tab' ], this.toggleFocus)
+    screen.key([ 'p' ], this.togglePause)
+    screen.key([ ',' ], this.volumeDown)
+    screen.key([ '.' ], this.volumeUp)
 
-    screen.key([ ',' ], () => {
-      const newVol = this.state.volume - 1
-      this.player.volume(newVol)
-      this.setState({ volume: newVol })
-    })
-
-    screen.key([ '.' ], () => {
-      const newVol = this.state.volume + 1
-      this.player.volume(newVol)
-      this.setState({ volume: newVol })
-    })
+    // screen.key([ 'a' ], this.addToPlaylist) // directory or file
+    // screen.key([ 'd' ], this.removeFromPlaylist)
+    // screen.key([ 's' ], this.savePlaylistToFile)
+    // screen.key([ 'o' ], this.loadPlaylistFromFile) // overwrites current list
+    // screen.key([ 'b' ], this.prev) // in playlist
+    // screen.key([ 'n' ], this.next) // in playlist
+    // screen.key([ 'h', 'j', 'k', 'l' ], () => { }) // map to arrows?
 
     this.tree.focus()
     loadChildren(explorer, this.reRender)
     this.setState({ cols: getCols() / 2 })
+  }
+
+  quit = () => {
+    exit()
+  }
+
+  toggleFocus = () => {
+    const { tree, table, props } = this
+    if (props.screen.focused === tree.rows) {
+      table.focus()
+    } else {
+      tree.focus()
+    }
+  }
+
+  togglePause = () => {
+    if (this.state.paused) {
+      this.player.play()
+    } else {
+      this.player.pause()
+    }
+    this.setState({ paused: !this.state.paused })
+  }
+
+  volumeDown = () => {
+    const newVol = this.state.volume - 2
+    this.player.volume(newVol)
+    this.setState({ volume: newVol })
+  }
+
+  volumeUp = () => {
+    const newVol = this.state.volume + 2
+    this.player.volume(newVol)
+    this.setState({ volume: newVol })
   }
 
   reRender = () => {
@@ -183,27 +203,6 @@ class App extends Component {
 }
 
 const screen = blessed.screen({ fullUnicode: true, smartCSR: true })
-
-// add song or directory to playlist on right pane
-// screen.key([ 'a' ], () => { })
-
-// remove song from playlist on right pane
-// screen.key([ 'd' ], () => { })
-
-// save to a playlist file
-// screen.key([ 's' ], () => { })
-
-// load from a playlist file (overwriting current playlist)
-// screen.key([ 'o' ], () => { })
-
-// prev in playlist
-// screen.key([ 'b' ], () => { })
-
-// next in playlist
-// screen.key([ 'n' ], () => { })
-
-// map to arrows?
-// screen.key([ 'h', 'j', 'k', 'l' ], () => { })
 
 // quit
 screen.key([ 'q', 'C-c' ], () => { exit() })
