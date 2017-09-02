@@ -66,7 +66,8 @@ const loadChildren = async (self, cb) => {
 class App extends Component {
   state = {
     tableData: [],
-    cols: 0
+    cols: 0,
+    paused: false
   }
 
   static propTypes = {
@@ -83,6 +84,16 @@ class App extends Component {
         tree.focus()
       }
     })
+
+    screen.key([ 'p' ], () => {
+      if (this.state.paused) {
+        player.play()
+      } else {
+        player.pause()
+      }
+      this.setState({ paused: !this.state.paused })
+    })
+
     this.tree.focus()
     loadChildren(explorer, this.reRender)
     this.setState({ cols: getCols() / 2 })
@@ -156,37 +167,34 @@ class App extends Component {
 const screen = blessed.screen()
 
 // immediately play song
-screen.key([ 'enter' ], () => { })
+// screen.key([ 'enter' ], () => { })
 
 // add song or directory to playlist on right pane
-screen.key([ 'a' ], () => { })
+// screen.key([ 'a' ], () => { })
 
 // remove song from playlist on right pane
-screen.key([ 'd' ], () => { })
+// screen.key([ 'd' ], () => { })
 
 // save to a playlist file
-screen.key([ 's' ], () => { })
+// screen.key([ 's' ], () => { })
 
 // load from a playlist file (overwriting current playlist)
-screen.key([ 'o' ], () => { })
+// screen.key([ 'o' ], () => { })
 
 // volume up
-screen.key([ 'u' ], () => { })
+// screen.key([ 'u' ], () => { })
 
 // volume down
-screen.key([ 'y' ], () => { })
+// screen.key([ 'y' ], () => { })
 
 // prev in playlist
-screen.key([ 'b' ], () => { })
+// screen.key([ 'b' ], () => { })
 
 // next in playlist
-screen.key([ 'n' ], () => { })
+// screen.key([ 'n' ], () => { })
 
 // map to arrows
-screen.key([ 'h', 'j', 'k', 'l' ], () => { })
-
-// pause, resume
-screen.key([ 'space' ], () => { })
+// screen.key([ 'h', 'j', 'k', 'l' ], () => { })
 
 // quit
 screen.key([ 'q', 'C-c' ], () => { exit() })

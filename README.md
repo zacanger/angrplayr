@@ -18,15 +18,21 @@ hood, so you'll need that installed as well.
 This will open a file explorer in your terminal. Use arrows to find an audio
 file, and hit `enter` to play.
 
+#### Keys:
+
+* `enter`: immediately play selected file
+* `p`: toggle paused/playing
+
 **Important** This probably can't work on Windows. Sorry.
 
 ### Roadmap:
 
-* Keypresses -- play, pause, stop, next, prev, add, remove, save volume up and down, vim-like
+* Keypresses -- stop, next, prev, add, remove, save volume up and down, vim-like
 * ID3
 * Unicode support
 * Improve UI, especially the right pane
 * Saving (m3u files)
+* Themes? (At least also support light terminals)
 
 ### License:
 
