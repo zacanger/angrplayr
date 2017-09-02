@@ -9,7 +9,8 @@ A music player for the console, in Node.
 `npm i -g angrplayr`
 
 `angrplayr` uses [mplayer](http://www.mplayerhq.hu/design7/dload.html) under the
-hood, so you'll need that installed as well.
+hood, so you'll need that installed as well. This module will fail to install if
+you don't have `mplayer` in your path somewhere.
 
 ### Usage:
 
