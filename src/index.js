@@ -184,9 +184,6 @@ class App extends Component {
 
 const screen = blessed.screen()
 
-// immediately play song
-// screen.key([ 'enter' ], () => { })
-
 // add song or directory to playlist on right pane
 // screen.key([ 'a' ], () => { })
 
@@ -205,7 +202,7 @@ const screen = blessed.screen()
 // next in playlist
 // screen.key([ 'n' ], () => { })
 
-// map to arrows
+// map to arrows?
 // screen.key([ 'h', 'j', 'k', 'l' ], () => { })
 
 // quit

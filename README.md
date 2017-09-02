@@ -12,6 +12,8 @@ A music player for the console, in Node.
 hood, so you'll need that installed as well. This module will fail to install if
 you don't have `mplayer` in your path somewhere.
 
+**Important**: This will probably never work on Windows. Sorry.
+
 ### Usage:
 
 `angrplayr` (or `ap` for short).
@@ -26,17 +28,15 @@ file, and hit `enter` to play.
 * `u`: volume up
 * `y`: volume down
 
-**Important** This probably can't work on Windows. Sorry.
-
 ### Roadmap:
 
-* Keypresses -- stop, next, prev, add, remove, save, vim-like
-* ID3
+* Seek
+* Metadata (ID3)
 * Unicode support
 * Improve UI, especially the right pane
-* Saving (m3u files)
+* Saving to/loading from m3u files
 * Themes? (At least also support light terminals)
-* Seek
+* Keys -- stop, next, prev, add, remove, save, vim-like, change order in playlist
 
 ### License:
 
