@@ -90,12 +90,9 @@ class App extends Component {
     screen.key([ ',' ], this.volumeDown)
     screen.key([ '.' ], this.volumeUp)
 
-    // screen.key([ 'a' ], this.addToPlaylist) // directory or file
-    // screen.key([ 'd' ], this.removeFromPlaylist)
-    // screen.key([ 's' ], this.savePlaylistToFile)
-    // screen.key([ 'o' ], this.loadPlaylistFromFile) // overwrites current list
-    // screen.key([ 'b' ], this.prev) // in playlist
-    // screen.key([ 'n' ], this.next) // in playlist
+    // screen.key([ 's' ], this.stop)
+    // screen.key([ 'b' ], this.prev)
+    // screen.key([ 'n' ], this.next)
     // screen.key([ 'h', 'j', 'k', 'l' ], () => { }) // map to arrows?
 
     this.tree.focus()
