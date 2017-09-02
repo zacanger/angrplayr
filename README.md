@@ -32,7 +32,6 @@ file, and hit `enter` to play.
 
 * Seek
 * Metadata (ID3)
-* Unicode support
 * Improve UI, especially the right pane
 * Saving to/loading from m3u files
 * Themes? (At least also support light terminals)

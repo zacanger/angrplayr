@@ -182,7 +182,7 @@ class App extends Component {
   }
 }
 
-const screen = blessed.screen()
+const screen = blessed.screen({ fullUnicode: true, smartCSR: true })
 
 // add song or directory to playlist on right pane
 // screen.key([ 'a' ], () => { })
