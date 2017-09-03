@@ -1,7 +1,7 @@
 {
   "name": "angrplayr",
   "description": "Console music player in Node.",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "author": {
     "name": "Zac Anger",
     "email": "zac@zacanger.com",
