@@ -115,11 +115,11 @@ class App extends Component {
   }
 
   seekBack = () => {
-    this.player.seekPercent(parseFloat(this.state.progress - 10))
+    this.player.seekPercent(parseFloat(this.state.progress - 5))
   }
 
   seekForward = () => {
-    this.player.seekPercent(parseFloat(this.state.progress + 10))
+    this.player.seekPercent(parseFloat(this.state.progress + 5))
   }
 
   clear = () => {
@@ -159,13 +159,13 @@ class App extends Component {
   }
 
   volumeDown = () => {
-    const newVol = this.state.volume - 2
+    const newVol = this.state.volume - 5
     this.player.volume(newVol)
     this.setState({ volume: newVol })
   }
 
   volumeUp = () => {
-    const newVol = this.state.volume + 2
+    const newVol = this.state.volume + 5
     this.player.volume(newVol)
     this.setState({ volume: newVol })
   }
