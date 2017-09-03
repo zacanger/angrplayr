@@ -49,6 +49,7 @@
     "blessed": "0.1.81",
     "mime": "1.4.0",
     "mplayer": "2.1.0",
+    "music-metadata": "0.8.2",
     "prop-types": "15.5.10",
     "react": "0.14.9",
     "react-blessed": "0.1.8",

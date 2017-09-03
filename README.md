@@ -51,7 +51,7 @@ just want to play all the files in a directory, in order.
 
 ### Roadmap
 
-* Keys -- stop, next, prev, vim-like
+* Keys -- next, prev, vim-like(?)
 * File browsing above cwd
 * Automatically play the next file in the directory
 * Seek

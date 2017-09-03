@@ -1,5 +1,6 @@
 import fs from 'fs'
 import MPlayer from 'mplayer'
+import { parseFile } from 'music-metadata'
 import mime from 'mime'
 import React, { Component } from 'react'
 import blessed from 'blessed'
@@ -7,9 +8,11 @@ import { render } from 'react-blessed'
 import { Grid, Tree, Gauge } from 'react-blessed-contrib'
 import exit from 'zeelib/lib/exit'
 import promisify from 'zeelib/lib/promisify'
-import getCols from 'zeelib/lib/get-terminal-columns'
 import isFile from 'zeelib/lib/is-file'
 import { any } from 'prop-types'
+
+const getPercent = (total, bit) =>
+  parseFloat((total / 100 * bit).toFixed(2))
 
 // this is just until i figure out metadata
 const getDisplayName = (s) => {
@@ -78,10 +81,12 @@ class App extends Component {
     super(props)
 
     this.state = {
-      cols: 0,
       paused: false,
       volume: 50,
-      filename: ''
+      filename: '',
+      progress: 0,
+      position: 0,
+      duration: 0
     }
 
     this.player = new MPlayer()
@@ -101,14 +106,23 @@ class App extends Component {
     screen.key([ ',' ], this.volumeDown)
     screen.key([ '.' ], this.volumeUp)
 
-    // screen.key([ 's' ], this.stop)
     // screen.key([ 'b' ], this.prev)
     // screen.key([ 'n' ], this.next)
     // screen.key([ 'h', 'j', 'k', 'l' ], () => { }) // map to arrows?
 
     this.tree.focus()
     loadChildren(explorer, this.reRender)
-    this.setState({ cols: getCols() / 2 })
+    setInterval(this.updatePosition, 1000)
+  }
+
+  updatePosition = () => {
+    const p = this.player.status && this.player.status.position
+    if (p) {
+      this.setState({
+        position: p,
+        progress: getPercent(this.state.duration, parseFloat(p))
+      })
+    }
   }
 
   advance = () => {
@@ -149,9 +163,13 @@ class App extends Component {
     loadChildren(node, this.reRender)
     const path = node.getPath(node) || '/'
     if (isFile(path) && isAudio(path)) {
+      const { format } = await parseFile(path, { duration: true })
       this.player.openFile(path)
       this.player.volume(this.state.volume)
-      this.setState({ filename: getDisplayName(path) })
+      this.setState({
+        filename: getDisplayName(path),
+        duration: format.duration
+      })
     }
   }
 
@@ -181,9 +199,8 @@ class App extends Component {
           }}
         />
         <Gauge
-          ref={this.setRef('progress')}
           key="progress"
-          data={100}
+          data={this.state.progress}
           label={this.state.filename}
           row={5}
           stroke="black"
