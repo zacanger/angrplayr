@@ -51,13 +51,14 @@ just want to play all the files in a directory, in order.
 
 ### Roadmap
 
-* Keys -- next, prev, vim-like(?)
-* File browsing above cwd
 * Automatically play the next file in the directory
+* Vim-like keys?
+* File browsing above cwd
 * Seek
 * Improve UI:
   * Themes? (At least also support light terminals)
-  * Add bottom pane with metadata (id3?) and playing progress
+  * Add metadata (id3 or whatever) to bottom pane
+  * Clear that interval so we don't get an `Infinity` for the progress bar
 
 ### License
 

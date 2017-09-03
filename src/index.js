@@ -12,7 +12,7 @@ import isFile from 'zeelib/lib/is-file'
 import { any } from 'prop-types'
 
 const getPercent = (total, bit) =>
-  parseFloat((total / 100 * bit).toFixed(2))
+  bit / total * 100
 
 // this is just until i figure out metadata
 const getDisplayName = (s) => {
@@ -86,11 +86,12 @@ class App extends Component {
       filename: '',
       progress: 0,
       position: 0,
-      duration: 0
+      duration: 0,
+      intervalId: null
     }
 
     this.player = new MPlayer()
-    // this.player.on('stop', this.advance)
+    this.player.on('stop', this.clear)
   }
 
   static propTypes = {
@@ -106,13 +107,20 @@ class App extends Component {
     screen.key([ ',' ], this.volumeDown)
     screen.key([ '.' ], this.volumeUp)
 
-    // screen.key([ 'b' ], this.prev)
-    // screen.key([ 'n' ], this.next)
     // screen.key([ 'h', 'j', 'k', 'l' ], () => { }) // map to arrows?
 
     this.tree.focus()
     loadChildren(explorer, this.reRender)
     setInterval(this.updatePosition, 1000)
+  }
+
+  clear = () => {
+    this.setState({
+      filename: '',
+      progress: 0,
+      position: 0,
+      duration: 0
+    })
   }
 
   updatePosition = () => {
@@ -203,7 +211,7 @@ class App extends Component {
           data={this.state.progress}
           label={this.state.filename}
           row={5}
-          stroke="black"
+          stroke="green"
           fill="black"
           rowSpan={1}
           colSpan={1}
