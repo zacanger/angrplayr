@@ -141,10 +141,6 @@ class App extends Component {
     }
   }
 
-  advance = () => {
-
-  }
-
   quit = () => {
     exit()
   }
