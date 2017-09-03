@@ -12,12 +12,13 @@ import isFile from 'zeelib/lib/is-file'
 import { any } from 'prop-types'
 
 // this is just until i figure out metadata
-const getDisplayName = (s) => {
+const getDisplayName = (s, common = {}) => {
   const a = s.split('/')
   if (a.length > 1) {
-    const f = a[a.length - 1]
-    const d = a[a.length - 2]
-    return `${d} - ${f}`
+    const track = common.title || a[a.length - 1]
+    const album = common.album || a[a.length - 2]
+    const artist = common.artist || ''
+    return `${artist} - ${album} - ${track}`
   }
   return ''
 }
@@ -171,17 +172,21 @@ class App extends Component {
     this.props.screen.render()
   }
 
+  playTrack = async (p) => {
+    const { format, common } = await parseFile(p, { duration: true })
+    this.player.openFile(p)
+    this.player.volume(this.state.volume)
+    this.setState({
+      filename: getDisplayName(p, common),
+      duration: format.duration
+    })
+  }
+
   onSelect = async (node) => {
     loadChildren(node, this.reRender)
     const path = node.getPath(node) || '/'
     if (isFile(path) && isAudio(path)) {
-      const { format } = await parseFile(path, { duration: true })
-      this.player.openFile(path)
-      this.player.volume(this.state.volume)
-      this.setState({
-        filename: getDisplayName(path),
-        duration: format.duration
-      })
+      this.playTrack(path)
     }
   }
 
