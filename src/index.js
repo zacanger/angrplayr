@@ -4,12 +4,23 @@ import mime from 'mime'
 import React, { Component } from 'react'
 import blessed from 'blessed'
 import { render } from 'react-blessed'
-import { Grid, Tree, Table } from 'react-blessed-contrib'
+import { Grid, Tree, Gauge } from 'react-blessed-contrib'
 import exit from 'zeelib/lib/exit'
 import promisify from 'zeelib/lib/promisify'
 import getCols from 'zeelib/lib/get-terminal-columns'
 import isFile from 'zeelib/lib/is-file'
 import { any } from 'prop-types'
+
+// this is just until i figure out metadata
+const getDisplayName = (s) => {
+  const a = s.split('/')
+  if (a.length > 1) {
+    const f = a[a.length - 1]
+    const d = a[a.length - 2]
+    return `${d} - ${f}`
+  }
+  return ''
+}
 
 const lstat = promisify(fs.lstat)
 const readdir = promisify(fs.readdir)
@@ -70,7 +81,7 @@ class App extends Component {
       cols: 0,
       paused: false,
       volume: 50,
-      tableData: []
+      filename: ''
     }
 
     this.player = new MPlayer()
@@ -137,12 +148,11 @@ class App extends Component {
   onSelect = async (node) => {
     loadChildren(node, this.reRender)
     const path = node.getPath(node) || '/'
-    const data = [ [ path ], [ '' ], [ path ] ]
     if (isFile(path) && isAudio(path)) {
       this.player.openFile(path)
       this.player.volume(this.state.volume)
+      this.setState({ filename: getDisplayName(path) })
     }
-    this.setState({ tableData: data })
   }
 
   setRef = (name) => (ref) => {
@@ -151,13 +161,13 @@ class App extends Component {
 
   render () {
     return (
-      <Grid rows={5} cols={1}>
+      <Grid rows={6} cols={1}>
         <Tree
           key="tree"
           ref={this.setRef('tree')}
           row={0}
           col={0}
-          rowSpan={4}
+          rowSpan={5}
           colSpan={1}
           options={{
             style: {
@@ -170,18 +180,17 @@ class App extends Component {
             onSelect: this.onSelect
           }}
         />
-        <Table
-          ref={this.setRef('table')}
-          key="table"
+        <Gauge
+          ref={this.setRef('progress')}
+          key="progress"
+          data={100}
+          label={this.state.filename}
           row={5}
+          stroke="black"
+          fill="black"
+          rowSpan={1}
+          colSpan={1}
           col={0}
-          options={{
-            keys: true,
-            fg: 'green',
-            label: 'Playing',
-            data: { headers: [], data: this.state.tableData },
-            columnWidth: [ 20, 10, 10 ]
-          }}
         />
       </Grid>
     )
