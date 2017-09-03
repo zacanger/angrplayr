@@ -186,37 +186,48 @@ class App extends Component {
   }
 
   render () {
+    const { progress, filename } = this.state
+
+    const gaugeProps = {
+      key: 'progress',
+      data: progress,
+      label: filename,
+      row: 5,
+      stroke: 'green',
+      fill: 'black',
+      rowSpan: 1,
+      colSpan: 1,
+      col: 0
+    }
+
+    const treeProps = {
+      key: 'tree',
+      ref: this.setRef('tree'),
+      row: 0,
+      col: 0,
+      rowSpan: 5,
+      colSpan: 1,
+      options: {
+        style: {
+          text: 'green'
+        },
+        template: {
+          lines: true
+        },
+        label: 'AngrPlayr',
+        onSelect: this.onSelect
+      }
+    }
+
+    const gridProps = {
+      rows: 6,
+      cols: 1
+    }
+
     return (
-      <Grid rows={6} cols={1}>
-        <Tree
-          key="tree"
-          ref={this.setRef('tree')}
-          row={0}
-          col={0}
-          rowSpan={5}
-          colSpan={1}
-          options={{
-            style: {
-              text: 'red'
-            },
-            template: {
-              lines: true
-            },
-            label: 'AngrPlayr',
-            onSelect: this.onSelect
-          }}
-        />
-        <Gauge
-          key="progress"
-          data={this.state.progress}
-          label={this.state.filename}
-          row={5}
-          stroke="green"
-          fill="black"
-          rowSpan={1}
-          colSpan={1}
-          col={0}
-        />
+      <Grid {...gridProps}>
+        <Tree {...treeProps} />
+        <Gauge {...gaugeProps} />
       </Grid>
     )
   }
