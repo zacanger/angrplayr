@@ -10,7 +10,7 @@ A music player for the console, in Node.
 
 `npm i -g angrplayr`
 
-`angrplayr` uses [mplayer](http://www.mplayerhq.hu/design7/dload.html) under the
+`angrplayr` uses [MPlayer](http://www.mplayerhq.hu/design7/dload.html) under the
 hood, so you'll need that installed as well. This module will fail to install if
 you don't have `mplayer` in your path somewhere.
 
@@ -27,6 +27,7 @@ you don't have `mplayer` in your path somewhere.
 * No streaming
 * No video
 * No GUI
+* No remote control
 
 ### Usage
 
@@ -44,17 +45,19 @@ file, and hit `enter` to play.
 
 ### Why?
 
-I really love [MOC](https://github.com/jonsafari/mocp). Been using it for years,
-and it's great. But I use a Mac at work, and audio on Macs is just plain weird,
-and it's problematic.
+I really love [MOC](https://github.com/jonsafari/mocp), but I use a Mac
+sometimes and audio on Macs is a little weird.
 
-I also wanted something _simpler_. Most of the time I don't need playlists, I
-just want to play all the files in a directory, in order.
+I also love MPlayer, but it's a bit unfriendly sometimes.
+
+`angrplayr` is meant to fit somewhere in between more full-featured audio
+programs like CMus and MOC and command-line clients like MPlayer and MPV. Most
+of the time I don't need playlists, streaming, remote control, or other
+features; I just want to play audio.
 
 ### Roadmap
 
 * Automatically play the next file in the directory
-* Vim-like keys?
 * File browsing above cwd
 * Seek
 * Improve UI:
