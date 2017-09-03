@@ -11,9 +11,6 @@ import promisify from 'zeelib/lib/promisify'
 import isFile from 'zeelib/lib/is-file'
 import { any } from 'prop-types'
 
-const getPercent = (total, bit) =>
-  bit / total * 100
-
 // this is just until i figure out metadata
 const getDisplayName = (s) => {
   const a = s.split('/')
@@ -27,6 +24,7 @@ const getDisplayName = (s) => {
 
 const lstat = promisify(fs.lstat)
 const readdir = promisify(fs.readdir)
+const getPercent = (total, bit) => bit / total * 100
 const isAudio = (s) => /audio/i.test(mime.lookup(s))
 
 const explorer = {
@@ -106,12 +104,22 @@ class App extends Component {
     screen.key([ 'p' ], this.togglePause)
     screen.key([ ',' ], this.volumeDown)
     screen.key([ '.' ], this.volumeUp)
+    screen.key([ ';' ], this.seekBack)
+    screen.key([ '\'' ], this.seekForward)
 
     // screen.key([ 'h', 'j', 'k', 'l' ], () => { }) // map to arrows?
 
     this.tree.focus()
     loadChildren(explorer, this.reRender)
     setInterval(this.updatePosition, 1000)
+  }
+
+  seekBack = () => {
+    this.player.seekPercent(parseFloat(this.state.progress - 10))
+  }
+
+  seekForward = () => {
+    this.player.seekPercent(parseFloat(this.state.progress + 10))
   }
 
   clear = () => {

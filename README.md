@@ -42,6 +42,8 @@ file, and hit `enter` to play.
 * `p`: toggle paused/playing
 * `.`: volume up
 * `,`: volume down
+* `;`: seek back
+* `'`: seek forward
 
 ### Why?
 
@@ -59,7 +61,6 @@ features; I just want to play audio.
 
 * Automatically play the next file in the directory
 * File browsing above cwd
-* Seek
 * Improve UI:
   * Themes? (At least also support light terminals)
   * Add metadata (id3 or whatever) to bottom pane
