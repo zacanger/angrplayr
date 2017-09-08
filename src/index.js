@@ -11,11 +11,16 @@ import promisify from 'zeelib/lib/promisify'
 import isFile from 'zeelib/lib/is-file'
 import { any } from 'prop-types'
 
+const stripFileExt = (s = '') =>
+  s.includes('.')
+    ? s.substr(0, s.lastIndexOf('.'))
+    : s
+
 // this is just until i figure out metadata
 const getDisplayName = (s, common = {}) => {
   const a = s.split('/')
   if (a.length > 1) {
-    const track = common.title || a[a.length - 1]
+    const track = common.title || stripFileExt(a[a.length - 1])
     const album = common.album || a[a.length - 2]
     const artist = common.artist || ''
     return `${artist} - ${album} - ${track}`
