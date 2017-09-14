@@ -16,7 +16,6 @@ const stripFileExt = (s = '') =>
     ? s.substr(0, s.lastIndexOf('.'))
     : s
 
-// this is just until i figure out metadata
 const getDisplayName = (s, common = {}) => {
   const a = s.split('/')
   if (a.length > 1) {
@@ -31,7 +30,7 @@ const getDisplayName = (s, common = {}) => {
 const lstat = promisify(fs.lstat)
 const readdir = promisify(fs.readdir)
 const getPercent = (total, bit) => bit / total * 100
-const isAudio = (s) => /audio/i.test(mime.lookup(s))
+const isAudio = (s) => /audio/i.test(mime.getType(s))
 
 const explorer = {
   name: '/',
