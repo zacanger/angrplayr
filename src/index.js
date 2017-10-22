@@ -1,35 +1,18 @@
-import fs from 'fs'
 import MPlayer from 'mplayer'
 import { parseFile } from 'music-metadata'
-import mime from 'mime'
 import React, { Component } from 'react'
 import blessed from 'blessed'
 import { render } from 'react-blessed'
 import { Grid, Tree, Gauge } from 'react-blessed-contrib'
 import exit from 'zeelib/lib/exit'
-import promisify from 'zeelib/lib/promisify'
 import isFile from 'zeelib/lib/is-file'
-
-const stripFileExt = (s = '') =>
-  s.includes('.')
-    ? s.substr(0, s.lastIndexOf('.'))
-    : s
-
-const getDisplayName = (s, common = {}) => {
-  const a = s.split('/')
-  if (a.length > 1) {
-    const track = common.title || stripFileExt(a[a.length - 1])
-    const album = common.album || a[a.length - 2]
-    const artist = common.artist || ''
-    return `${artist} - ${album} - ${track}`
-  }
-  return ''
-}
-
-const lstat = promisify(fs.lstat)
-const readdir = promisify(fs.readdir)
-const getPercent = (total, bit) => bit / total * 100
-const isAudio = (s) => /audio/i.test(mime.getType(s))
+import {
+  getDisplayName,
+  getPercent,
+  isAudio,
+  lstat,
+  readdir
+} from './util'
 
 const explorer = {
   name: '/',
