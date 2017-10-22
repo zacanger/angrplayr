@@ -9,7 +9,6 @@ import { Grid, Tree, Gauge } from 'react-blessed-contrib'
 import exit from 'zeelib/lib/exit'
 import promisify from 'zeelib/lib/promisify'
 import isFile from 'zeelib/lib/is-file'
-import { any } from 'prop-types'
 
 const stripFileExt = (s = '') =>
   s.includes('.')
@@ -97,10 +96,6 @@ class App extends Component {
     this.player.on('stop', this.clear)
   }
 
-  static propTypes = {
-    screen: any
-  }
-
   componentDidMount () {
     const { screen } = this.props
 
@@ -111,6 +106,9 @@ class App extends Component {
     screen.key([ '.' ], this.volumeUp)
     screen.key([ ';' ], this.seekBack)
     screen.key([ '\'' ], this.seekForward)
+
+    // screen.key([ 'b' ], this.prev)
+    // screen.key([ 'n' ], this.next)
 
     // screen.key([ 'h', 'j', 'k', 'l' ], () => { }) // map to arrows?
 
