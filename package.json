@@ -49,11 +49,11 @@
     "blessed": "0.1.81",
     "mime": "2.0.3",
     "mplayer": "2.1.0",
-    "music-metadata": "0.8.6",
+    "music-metadata": "0.8.7",
     "react": "0.14.9",
     "react-blessed": "0.1.8",
     "react-blessed-contrib": "0.1.2",
-    "zeelib": "4.0.1"
+    "zeelib": "4.0.2"
   },
   "devDependencies": {
     "babel-cli": "6.26.0",
@@ -64,10 +64,10 @@
     "babel-plugin-transform-object-rest-spread": "6.26.0",
     "babel-preset-latest-minimal": "1.1.2",
     "babel-preset-react": "6.24.1",
-    "eslint": "4.9.0",
+    "eslint": "4.10.0",
     "eslint-config-jane": "0.6.2",
     "eslint-plugin-babel": "4.1.2",
-    "eslint-plugin-node": "5.2.0",
+    "eslint-plugin-node": "5.2.1",
     "eslint-plugin-promise": "3.6.0",
     "eslint-plugin-react": "7.4.0",
     "eslint-plugin-unicorn": "2.1.2"
