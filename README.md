@@ -65,7 +65,8 @@ features; I just want to play audio.
   * Fix progress bar jump at beginning of playback
   * Fix progress bar not showing up depending on size of terminal
   * Clear that interval so we don't get an `Infinity` for the progress bar
-
+* Update React (depends on
+  <https://github.com/Yomguithereal/react-blessed/pull/60>)
 ### License
 
 [WTFPL](LICENSE.md)
