@@ -2,7 +2,7 @@
 
 A music player for the console, in Node.
 
-![screenshot](http://zacanger.com/angrplayr.png)
+![screenshot](http://zacanger.com/assets/angrplayr.png)
 
 --------
 
