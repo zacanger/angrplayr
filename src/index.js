@@ -95,7 +95,7 @@ class App extends Component {
 
     // screen.key([ 'h', 'j', 'k', 'l' ], () => { }) // map to arrows?
 
-    this.tree.focus()
+    this.tree.widget.focus()
     loadChildren(explorer, this.reRender)
     setInterval(this.updatePosition, 1000)
   }
@@ -153,7 +153,7 @@ class App extends Component {
   }
 
   reRender = () => {
-    this.tree.setData(explorer)
+    this.tree.widget.setData(explorer)
     this.props.screen.render()
   }
 
