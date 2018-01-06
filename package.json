@@ -47,13 +47,13 @@
   "dependencies": {
     "babel-register": "6.26.0",
     "blessed": "0.1.81",
-    "mime": "2.1.0",
+    "mime": "2.2.0",
     "mplayer": "2.1.0",
     "music-metadata": "0.8.7",
-    "react": "0.14.9",
-    "react-blessed": "0.1.8",
-    "react-blessed-contrib": "0.1.2",
-    "zeelib": "4.0.7"
+    "react": "16.2.0",
+    "react-blessed": "0.2.1",
+    "react-blessed-contrib": "0.2.0",
+    "zeelib": "5.0.0"
   },
   "devDependencies": {
     "babel-cli": "6.26.0",
