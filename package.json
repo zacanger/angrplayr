@@ -7,17 +7,14 @@
     "email": "zac@zacanger.com",
     "url": "http://zacanger.com"
   },
-  "license": "WTFPL",
+  "license": "MIT",
   "main": "index.js",
   "files": [
     "lib",
     "index.js"
   ],
   "preferGlobal": true,
-  "bin": {
-    "angrplayr": "./index.js",
-    "ap": "./index.js"
-  },
+  "bin": "./index.js",
   "scripts": {
     "build": "babel src/ -d lib/",
     "demo": "babel-node src/index.js",
@@ -58,14 +55,14 @@
   "devDependencies": {
     "babel-cli": "6.26.0",
     "babel-core": "6.26.0",
-    "babel-eslint": "8.1.2",
+    "babel-eslint": "8.2.1",
     "babel-plugin-transform-class-properties": "6.24.1",
     "babel-plugin-transform-export-extensions": "6.22.0",
     "babel-plugin-transform-object-rest-spread": "6.26.0",
     "babel-preset-latest-minimal": "1.1.2",
     "babel-preset-react": "6.24.1",
-    "eslint": "4.14.0",
-    "eslint-config-jane": "0.7.2",
+    "eslint": "4.16.0",
+    "eslint-config-jane": "0.7.3",
     "eslint-plugin-babel": "4.1.2",
     "eslint-plugin-node": "5.2.1",
     "eslint-plugin-promise": "3.6.0",

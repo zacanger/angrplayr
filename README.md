@@ -31,7 +31,7 @@ you don't have `mplayer` in your path somewhere.
 
 ### Usage
 
-`angrplayr` (or `ap` for short).
+`angrplayr`
 
 This will open a file explorer in your terminal. Use arrows to find an audio
 file, and hit `enter` to play.
@@ -66,6 +66,12 @@ features; I just want to play audio.
   * Fix progress bar not showing up depending on size of terminal
   * Clear that interval so we don't get an `Infinity` for the progress bar
 
+### Changes
+
+* 1.0.0 - 21/01/2018
+  * Switch to MIT (from WTFPL)
+  * Remove `ap` (use `alias ap='angrplayr'` if you want it back)
+
 ### License
 
-[WTFPL](LICENSE.md)
+[MIT](LICENSE.md)
