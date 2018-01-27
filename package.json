@@ -46,7 +46,7 @@
     "blessed": "0.1.81",
     "mime": "2.2.0",
     "mplayer": "2.1.0",
-    "music-metadata": "0.8.7",
+    "music-metadata": "0.8.8",
     "react": "16.2.0",
     "react-blessed": "0.2.1",
     "react-blessed-contrib": "0.2.0",
@@ -66,7 +66,7 @@
     "eslint-plugin-babel": "4.1.2",
     "eslint-plugin-node": "5.2.1",
     "eslint-plugin-promise": "3.6.0",
-    "eslint-plugin-react": "7.5.1",
+    "eslint-plugin-react": "7.6.0",
     "eslint-plugin-unicorn": "3.0.1"
   },
   "engines": {
