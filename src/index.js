@@ -5,11 +5,10 @@ import blessed from 'blessed'
 import { render } from 'react-blessed'
 import { Grid, Tree, Gauge } from 'react-blessed-contrib'
 import exit from 'zeelib/lib/exit'
-import isFile from 'zeelib/lib/is-file'
 import {
   getDisplayName,
   getPercent,
-  isAudio,
+  isAudioFile,
   lstat,
   readdir
 } from './util'
@@ -72,11 +71,12 @@ class App extends Component {
       progress: 0,
       position: 0,
       duration: 0,
-      intervalId: null
+      intervalId: null,
+      audioFiles: []
     }
 
     this.player = new MPlayer()
-    this.player.on('stop', this.clear)
+    this.player.on('stop', this.playNext)
   }
 
   componentDidMount () {
@@ -97,7 +97,15 @@ class App extends Component {
 
     this.tree.widget.focus()
     loadChildren(explorer, this.reRender)
-    setInterval(this.updatePosition, 1000)
+    const intervalId = setInterval(this.updatePosition, 1000)
+    this.setState({ intervalId })
+  }
+
+  filterAudioFiles = (t) => {
+    const cs = t && t.data && t.data.children
+    const fs = Object.keys(cs || {})
+    const audioFiles = fs.filter((p) => p && isAudioFile(p))
+    this.setState({ audioFiles })
   }
 
   seekBack = () => {
@@ -109,12 +117,19 @@ class App extends Component {
   }
 
   clear = () => {
+    clearInterval(this.state.intervalId)
     this.setState({
       filename: '',
       progress: 0,
       position: 0,
-      duration: 0
+      duration: 0,
+      intervalId: null
     })
+  }
+
+  playNext = () => {
+    this.setState({ foo: this.tree.widget })
+    this.clear()
   }
 
   updatePosition = () => {
@@ -170,9 +185,10 @@ class App extends Component {
   onSelect = async (node) => {
     loadChildren(node, this.reRender)
     const path = node.getPath(node) || '/'
-    if (isFile(path) && isAudio(path)) {
+    if (isAudioFile(path)) {
       this.playTrack(path)
     }
+    this.filterAudioFiles(this.tree && this.tree.widget)
   }
 
   setRef = (name) => (ref) => {
