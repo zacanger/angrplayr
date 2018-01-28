@@ -107,12 +107,17 @@ class App extends Component {
   }
 
   filterAudioFiles = (t) => {
-    const cs = t && t.data && t.data.children
-    const files = Object.keys(cs || {})
-    const audioFiles = files.filter((p) => p && isAudioFile(p))
-    this.setState({ audioFiles })
-    log(explorer)
-    this.setState({ explorer })
+    // const path = node.getPath(node) || '/'
+    // if (isAudioFile(path)) {
+      // this.playTrack(path)
+    // }
+
+    const cs = t && t.childrenContent
+    const files = Object.keys(cs).map((c) => t.getPath(cs[c]))
+    this.setState({ files, cs, t })
+    // const files = Object.keys(cs || {})
+    /// const audioFiles = files.filter((p) => p && isAudioFile(p))
+    /// this.setState({ audioFiles})
   }
 
   seekBack = () => {
@@ -195,7 +200,7 @@ class App extends Component {
     if (isAudioFile(path)) {
       this.playTrack(path)
     }
-    this.filterAudioFiles(this.tree && this.tree.widget)
+    this.filterAudioFiles(node)
   }
 
   setRef = (name) => (ref) => {
