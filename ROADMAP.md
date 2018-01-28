@@ -1,6 +1,5 @@
 # Roadmap
 
-* Automatically play the next file in the directory
 * File browsing above cwd
 * Improve UI:
   * Fix progress bar jump at beginning of playback
