@@ -107,17 +107,14 @@ class App extends Component {
   }
 
   filterAudioFiles = (t) => {
-    // const path = node.getPath(node) || '/'
-    // if (isAudioFile(path)) {
-      // this.playTrack(path)
-    // }
-
-    const cs = t && t.childrenContent
-    const files = Object.keys(cs).map((c) => t.getPath(cs[c]))
-    this.setState({ files, cs, t })
-    // const files = Object.keys(cs || {})
-    /// const audioFiles = files.filter((p) => p && isAudioFile(p))
-    /// this.setState({ audioFiles})
+    // this doesn't work when you first open it, but if you close and expand again it's fine.
+    // hmmm...
+    const cs = t && t.children
+    if (cs) {
+      const files = Object.keys(cs || {}).map((c) => t.getPath(cs[c]))
+      const audioFiles = files.filter(isAudioFile)
+      this.setState({ files, cs, t, audioFiles })
+    }
   }
 
   seekBack = () => {
