@@ -13,6 +13,11 @@ import {
   readdir
 } from './util'
 
+// temporary, for logging; console.log writes to the blessed screen, which is a mess
+// `log(something)` and tail -f log in another terminal
+import fs from 'fs'
+const log = (s) => { fs.appendFileSync('log', s + '\n') }
+
 const explorer = {
   name: '/',
   extended: true,
@@ -103,9 +108,11 @@ class App extends Component {
 
   filterAudioFiles = (t) => {
     const cs = t && t.data && t.data.children
-    const fs = Object.keys(cs || {})
-    const audioFiles = fs.filter((p) => p && isAudioFile(p))
+    const files = Object.keys(cs || {})
+    const audioFiles = files.filter((p) => p && isAudioFile(p))
     this.setState({ audioFiles })
+    log(explorer)
+    this.setState({ explorer })
   }
 
   seekBack = () => {
