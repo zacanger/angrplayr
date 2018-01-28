@@ -17,10 +17,12 @@ const stripFileExt = (s = '') =>
 export const getDisplayName = (s, common = {}) => {
   const a = s.split('/')
   if (a.length > 1) {
+    const albumName = common.album || a[a.length - 2]
+    const artistName = common.artist || ''
     const track = common.title || stripFileExt(a[a.length - 1])
-    const album = common.album || a[a.length - 2]
-    const artist = common.artist || ''
-    return `${artist} - ${album} - ${track}`
+    const artist = artistName ? `${artistName} - ` : ''
+    const album = albumName ? `${albumName} - ` : ''
+    return `${artist}${album}${track}`
   }
   return ''
 }

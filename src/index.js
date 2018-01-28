@@ -70,14 +70,15 @@ class App extends Component {
     super(props)
 
     this.state = {
-      paused: false,
-      volume: 50,
-      filename: '',
-      progress: 0,
-      position: 0,
+      audioFiles: [],
       duration: 0,
+      filename: '',
+      fullPath: '',
       intervalId: null,
-      audioFiles: []
+      paused: false,
+      position: 0,
+      progress: 0,
+      volume: 50
     }
 
     this.player = new MPlayer()
@@ -111,16 +112,20 @@ class App extends Component {
     if (cs) {
       const files = Object.keys(cs || {}).map((c) => t.getPath(cs[c]))
       const audioFiles = files.filter(isAudioFile)
-      this.setState({ files, cs, t, audioFiles })
+      this.setState({ audioFiles })
     }
   }
 
+  seek = (s) => {
+    this.player.seekPercent(parseFloat(s))
+  }
+
   seekBack = () => {
-    this.player.seekPercent(parseFloat(this.state.progress - 5))
+    this.seek(this.state.progress - 10)
   }
 
   seekForward = () => {
-    this.player.seekPercent(parseFloat(this.state.progress + 5))
+    this.seek(this.state.progress + 10)
   }
 
   clear = () => {
@@ -135,8 +140,13 @@ class App extends Component {
   }
 
   playNext = () => {
-    this.setState({ foo: this.tree.widget })
     this.clear()
+    const { audioFiles, fullPath } = this.state
+    const idx = audioFiles.indexOf(fullPath)
+    const nextFile = audioFiles[idx + 1]
+    if (nextFile) {
+      this.playTrack(nextFile)
+    }
   }
 
   updatePosition = () => {
@@ -186,7 +196,8 @@ class App extends Component {
         this.player.volume(this.state.volume)
         this.setState({
           filename: getDisplayName(p, common),
-          duration: format.duration
+          duration: format.duration,
+          fullPath: p
         })
       })
   }
