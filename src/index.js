@@ -30,19 +30,19 @@ const explorer = {
       : self.parent.getPath(self.parent) + '/' + self.name
 }
 
-const loadChildren = async (self, cb) => {
+const loadChildren = (self, cb) => {
   let result = {}
   try {
     let selfPath = self.getPath(self)
     // List files in this directory
-    let children = await readdir(selfPath + '/')
+    let children = readdir(selfPath + '/')
 
     // childrenContent is a property filled with self.children() result
     // on tree generation (tree.setData() call)
     for (let child in children) { // eslint-disable-line guard-for-in
       child = children[child]
       const completePath = selfPath + '/' + child
-      if ((await lstat(completePath)).isDirectory()) {
+      if ((lstat(completePath)).isDirectory()) {
         // If it's a directory we generate the child with the children generation function
         result[child] = {
           name: child,
@@ -107,8 +107,6 @@ class App extends Component {
   }
 
   filterAudioFiles = (t) => {
-    // this doesn't work when you first open it, but if you close and expand again it's fine.
-    // hmmm...
     const cs = t && t.children
     if (cs) {
       const files = Object.keys(cs || {}).map((c) => t.getPath(cs[c]))
@@ -191,7 +189,7 @@ class App extends Component {
     })
   }
 
-  onSelect = async (node) => {
+  onSelect = (node) => {
     loadChildren(node, this.reRender)
     const path = node.getPath(node) || '/'
     if (isAudioFile(path)) {
