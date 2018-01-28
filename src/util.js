@@ -7,6 +7,7 @@ export const readdir = fs.readdirSync
 export const getPercent = (total, bit) => bit / total * 100
 export const isAudio = (s) => /audio/i.test(mime.getType(s))
 export const isAudioFile = (file) => isFile(file) && isAudio(file)
+export const isDirectory = (path) => lstat(path).isDirectory()
 
 const stripFileExt = (s = '') =>
   s.includes('.')

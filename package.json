@@ -70,6 +70,6 @@
     "eslint-plugin-unicorn": "3.0.1"
   },
   "engines": {
-    "node": ">=8.0.0"
+    "node": ">=6.0.0"
   }
 }

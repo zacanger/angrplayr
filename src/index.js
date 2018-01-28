@@ -9,7 +9,7 @@ import {
   getDisplayName,
   getPercent,
   isAudioFile,
-  lstat,
+  isDirectory,
   readdir
 } from './util'
 
@@ -42,7 +42,7 @@ const loadChildren = (self, cb) => {
     for (let child in children) { // eslint-disable-line guard-for-in
       child = children[child]
       const completePath = selfPath + '/' + child
-      if ((lstat(completePath)).isDirectory()) {
+      if (isDirectory(completePath)) {
         // If it's a directory we generate the child with the children generation function
         result[child] = {
           name: child,
@@ -179,14 +179,16 @@ class App extends Component {
     this.props.screen.render()
   }
 
-  playTrack = async (p) => {
-    const { format, common } = await parseFile(p, { duration: true })
-    this.player.openFile(p)
-    this.player.volume(this.state.volume)
-    this.setState({
-      filename: getDisplayName(p, common),
-      duration: format.duration
-    })
+  playTrack = (p) => {
+    parseFile(p, { duration: true })
+      .then(({ format, common }) => {
+        this.player.openFile(p)
+        this.player.volume(this.state.volume)
+        this.setState({
+          filename: getDisplayName(p, common),
+          duration: format.duration
+        })
+      })
   }
 
   onSelect = (node) => {

@@ -68,6 +68,9 @@ features; I just want to play audio.
 
 ### Changes
 
+* 2.0.0 - ?????
+  * Remove `async`/`await` for Node pre-8 compat
+  * Auto-advance to next audio file
 * 1.0.0 - 21/01/2018
   * Switch to MIT (from WTFPL)
   * Remove `ap` (use `alias ap='angrplayr'` if you want it back)
