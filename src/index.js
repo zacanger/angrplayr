@@ -98,8 +98,6 @@ class App extends Component {
 
     this.tree.widget.focus()
     loadChildren(explorer, this.reRender)
-    const intervalId = setInterval(this.updatePosition, 1000)
-    this.setState({ intervalId })
   }
 
   filterAudioFiles = (t) => {
@@ -189,10 +187,12 @@ class App extends Component {
       .then(({ format, common }) => {
         this.player.openFile(p)
         this.player.volume(this.state.volume)
+        const intervalId = setInterval(this.updatePosition, 1000)
         this.setState({
           filename: getDisplayName(p, common),
           duration: format.duration,
-          fullPath: p
+          fullPath: p,
+          intervalId
         })
       })
   }
