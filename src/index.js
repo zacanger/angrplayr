@@ -196,8 +196,9 @@ class App extends Component {
     const path = node.getPath(node) || '/'
     if (isAudioFile(path)) {
       this.playTrack(path)
+    } else if (isDirectory(path)) {
+      this.filterAudioFiles(node)
     }
-    this.filterAudioFiles(node)
   }
 
   setRef = (name) => (ref) => {
