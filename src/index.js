@@ -5,14 +5,18 @@ import blessed from 'blessed'
 import { render } from 'react-blessed'
 import { Grid, Tree, Gauge } from 'react-blessed-contrib'
 import exit from 'zeelib/lib/exit'
-import isFile from 'zeelib/lib/is-file'
 import {
   getDisplayName,
   getPercent,
-  isAudio,
-  lstat,
+  isAudioFile,
+  isDirectory,
   readdir
 } from './util'
+
+// temporary, for logging; console.log writes to the blessed screen, which is a mess
+// `log(something)` and tail -f log in another terminal
+import fs from 'fs'
+const log = (s) => { fs.appendFileSync('log', s + '\n') }
 
 const explorer = {
   name: '/',
@@ -26,19 +30,19 @@ const explorer = {
       : self.parent.getPath(self.parent) + '/' + self.name
 }
 
-const loadChildren = async (self, cb) => {
+const loadChildren = (self, cb) => {
   let result = {}
   try {
     let selfPath = self.getPath(self)
     // List files in this directory
-    let children = await readdir(selfPath + '/')
+    let children = readdir(selfPath + '/')
 
     // childrenContent is a property filled with self.children() result
     // on tree generation (tree.setData() call)
     for (let child in children) { // eslint-disable-line guard-for-in
       child = children[child]
       const completePath = selfPath + '/' + child
-      if ((await lstat(completePath)).isDirectory()) {
+      if (isDirectory(completePath)) {
         // If it's a directory we generate the child with the children generation function
         result[child] = {
           name: child,
@@ -66,17 +70,19 @@ class App extends Component {
     super(props)
 
     this.state = {
-      paused: false,
-      volume: 50,
-      filename: '',
-      progress: 0,
-      position: 0,
+      audioFiles: [],
       duration: 0,
-      intervalId: null
+      filename: '',
+      fullPath: '',
+      intervalId: null,
+      paused: false,
+      position: 0,
+      progress: 0,
+      volume: 50
     }
 
     this.player = new MPlayer()
-    this.player.on('stop', this.clear)
+    this.player.on('stop', this.playNext)
   }
 
   componentDidMount () {
@@ -97,24 +103,50 @@ class App extends Component {
 
     this.tree.widget.focus()
     loadChildren(explorer, this.reRender)
-    setInterval(this.updatePosition, 1000)
+    const intervalId = setInterval(this.updatePosition, 1000)
+    this.setState({ intervalId })
+  }
+
+  filterAudioFiles = (t) => {
+    const cs = t && t.children
+    if (cs) {
+      const files = Object.keys(cs || {}).map((c) => t.getPath(cs[c]))
+      const audioFiles = files.filter(isAudioFile)
+      this.setState({ audioFiles })
+    }
+  }
+
+  seek = (s) => {
+    this.player.seekPercent(parseFloat(s))
   }
 
   seekBack = () => {
-    this.player.seekPercent(parseFloat(this.state.progress - 5))
+    this.seek(this.state.progress - 10)
   }
 
   seekForward = () => {
-    this.player.seekPercent(parseFloat(this.state.progress + 5))
+    this.seek(this.state.progress + 10)
   }
 
   clear = () => {
+    clearInterval(this.state.intervalId)
     this.setState({
       filename: '',
       progress: 0,
       position: 0,
-      duration: 0
+      duration: 0,
+      intervalId: null
     })
+  }
+
+  playNext = () => {
+    this.clear()
+    const { audioFiles, fullPath } = this.state
+    const idx = audioFiles.indexOf(fullPath)
+    const nextFile = audioFiles[idx + 1]
+    if (nextFile) {
+      this.playTrack(nextFile)
+    }
   }
 
   updatePosition = () => {
@@ -157,21 +189,26 @@ class App extends Component {
     this.props.screen.render()
   }
 
-  playTrack = async (p) => {
-    const { format, common } = await parseFile(p, { duration: true })
-    this.player.openFile(p)
-    this.player.volume(this.state.volume)
-    this.setState({
-      filename: getDisplayName(p, common),
-      duration: format.duration
-    })
+  playTrack = (p) => {
+    parseFile(p, { duration: true })
+      .then(({ format, common }) => {
+        this.player.openFile(p)
+        this.player.volume(this.state.volume)
+        this.setState({
+          filename: getDisplayName(p, common),
+          duration: format.duration,
+          fullPath: p
+        })
+      })
   }
 
-  onSelect = async (node) => {
+  onSelect = (node) => {
     loadChildren(node, this.reRender)
     const path = node.getPath(node) || '/'
-    if (isFile(path) && isAudio(path)) {
+    if (isAudioFile(path)) {
       this.playTrack(path)
+    } else if (isDirectory(path)) {
+      this.filterAudioFiles(node)
     }
   }
 

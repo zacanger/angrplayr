@@ -2,7 +2,11 @@
 
 A music player for the console, in Node.
 
-![screenshot](http://zacanger.com/assets/angrplayr.png)
+![Screenshot](http://zacanger.com/assets/angrplayr.png)
+
+* [Roadmap](./ROADMAP.md)
+* [Changes](./CHANGES.md)
+* [License](./LICENSE.md)
 
 --------
 
@@ -16,9 +20,7 @@ you don't have `mplayer` in your path somewhere.
 
 #### Important
 
-* This will probably never work on Windows. Sorry.
-* `angrplayr` requires at least Node version 8, because it uses some async
-  functions.
+`angrplayr` requires at least Node verson 6 and does not work on Windows.
 
 ### Unfeatures
 
@@ -56,22 +58,3 @@ I also love MPlayer, but it's a bit unfriendly sometimes.
 programs like CMus and MOC and command-line clients like MPlayer and MPV. Most
 of the time I don't need playlists, streaming, remote control, or other
 features; I just want to play audio.
-
-### Roadmap
-
-* Automatically play the next file in the directory
-* File browsing above cwd
-* Improve UI:
-  * Fix progress bar jump at beginning of playback
-  * Fix progress bar not showing up depending on size of terminal
-  * Clear that interval so we don't get an `Infinity` for the progress bar
-
-### Changes
-
-* 1.0.0 - 21/01/2018
-  * Switch to MIT (from WTFPL)
-  * Remove `ap` (use `alias ap='angrplayr'` if you want it back)
-
-### License
-
-[MIT](LICENSE.md)
