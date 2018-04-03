@@ -47,6 +47,20 @@ file, and hit `enter` to play.
 * `;`: seek back
 * `'`: seek forward
 
+#### Config
+
+`angrplayr` will read from a config file if it exists.
+The config file must be valid JSON at `~/.config/angrplayr.json`.
+
+Defaults:
+
+~/.config/angrplayr.json
+```json
+{
+  "showHiddenFiles": false
+}
+```
+
 ### Why?
 
 I really love [MOC](https://github.com/jonsafari/mocp), but I use a Mac

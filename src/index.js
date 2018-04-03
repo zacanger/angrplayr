@@ -5,13 +5,21 @@ import blessed from 'blessed'
 import { render } from 'react-blessed'
 import { Grid, Tree, Gauge } from 'react-blessed-contrib'
 import exit from 'zeelib/lib/exit'
+import id from 'zeelib/lib/id'
 import {
+  configPath,
   getDisplayName,
   getPercent,
   isAudioFile,
   isDirectory,
+  isNotHidden,
   readdir
 } from './util'
+
+let userConfig = {}
+try {
+  userConfig = require(configPath)
+} catch (_) { }
 
 const explorer = {
   name: '/',
@@ -31,6 +39,7 @@ const loadChildren = (self, cb) => {
     let selfPath = self.getPath(self)
     // List files in this directory
     let children = readdir(selfPath + '/')
+      .filter(userConfig.showHiddenFiles ? id : isNotHidden)
 
     // childrenContent is a property filled with self.children() result
     // on tree generation (tree.setData() call)
