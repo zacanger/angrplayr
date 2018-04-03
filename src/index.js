@@ -21,6 +21,8 @@ try {
   userConfig = require(configPath)
 } catch (_) { }
 
+const volPercent = 5
+
 const explorer = {
   name: '/',
   extended: true,
@@ -154,9 +156,12 @@ class App extends Component {
   updatePosition = () => {
     const p = this.player.status && this.player.status.position
     if (p) {
-      this.setState({
-        position: p,
-        progress: getPercent(this.state.duration, parseFloat(p))
+      this.setState(({ duration }) => {
+        const progress = getPercent(duration, parseFloat(p))
+        return {
+          position: p,
+          progress
+        }
       })
     }
   }
@@ -166,24 +171,30 @@ class App extends Component {
   }
 
   togglePause = () => {
-    if (this.state.paused) {
-      this.player.play()
-    } else {
-      this.player.pause()
-    }
-    this.setState({ paused: !this.state.paused })
+    this.setState(({ paused: oldPaused }) => {
+      if (oldPaused) {
+        this.player.play()
+      } else {
+        this.player.pause()
+      }
+      return { paused: !oldPaused }
+    })
+  }
+
+  adjustVolume = (f) => {
+    this.setState(({ volume: oldVol }) => {
+      const newVol = f(oldVol)
+      this.player.volume(newVol)
+      return { volume: newVol }
+    })
   }
 
   volumeDown = () => {
-    const newVol = this.state.volume - 5
-    this.player.volume(newVol)
-    this.setState({ volume: newVol })
+    this.adjustVolume((v) => v - volPercent)
   }
 
   volumeUp = () => {
-    const newVol = this.state.volume + 5
-    this.player.volume(newVol)
-    this.setState({ volume: newVol })
+    this.adjustVolume((v) => v + volPercent)
   }
 
   reRender = () => {
