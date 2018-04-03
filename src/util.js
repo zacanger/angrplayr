@@ -13,7 +13,7 @@ export const isNotHidden = (file) => !file.startsWith('.')
 export const configPath = getHome() + '/.config/angrplayr.json'
 
 const stripFileExt = (s = '') =>
-  s.includes('.')
+  s.includes('.') && !isNotHidden(s)
     ? s.substr(0, s.lastIndexOf('.'))
     : s
 
