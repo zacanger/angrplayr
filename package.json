@@ -44,31 +44,31 @@
   "dependencies": {
     "babel-register": "6.26.0",
     "blessed": "0.1.81",
-    "mime": "2.2.2",
+    "mime": "2.3.1",
     "mplayer": "2.1.0",
-    "music-metadata": "0.9.12",
-    "react": "16.3.0",
+    "music-metadata": "0.9.15",
+    "react": "16.3.2",
     "react-blessed": "0.2.1",
     "react-blessed-contrib": "0.2.1",
-    "zeelib": "6.1.8"
+    "zeelib": "6.1.10"
   },
   "devDependencies": {
     "babel-cli": "6.26.0",
     "babel-core": "6.26.0",
-    "babel-eslint": "8.2.2",
+    "babel-eslint": "8.2.3",
     "babel-plugin-transform-class-properties": "6.24.1",
     "babel-plugin-transform-export-extensions": "6.22.0",
     "babel-plugin-transform-object-rest-spread": "6.26.0",
     "babel-preset-latest-minimal": "1.1.2",
     "babel-preset-react": "6.24.1",
     "eslint": "4.19.1",
-    "eslint-config-jane": "1.2.1",
+    "eslint-config-jane": "2.0.2",
     "eslint-plugin-babel": "5.0.0",
-    "eslint-plugin-import": "2.10.0",
+    "eslint-plugin-import": "2.11.0",
     "eslint-plugin-node": "6.0.1",
     "eslint-plugin-promise": "3.7.0",
     "eslint-plugin-react": "7.7.0",
-    "eslint-plugin-unicorn": "4.0.2"
+    "eslint-plugin-unicorn": "4.0.3"
   },
   "engines": {
     "node": ">=6.0.0"
