@@ -12,8 +12,8 @@ export const isDirectory = (path) => lstat(path).isDirectory()
 export const isNotHidden = (file) => !file.startsWith('.')
 export const configPath = getHome() + '/.config/angrplayr.json'
 
-const stripFileExt = (s = '') =>
-  s.includes('.') && !isNotHidden(s)
+export const stripFileExt = (s = '') =>
+  s.includes('.') && isNotHidden(s)
     ? s.substr(0, s.lastIndexOf('.'))
     : s
 
