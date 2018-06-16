@@ -4,7 +4,6 @@ A music player for the console, in Node.
 
 ![screenshot](/screenshot.png?raw=true)
 
-* [Roadmap](./ROADMAP.md)
 * [Changes](./CHANGES.md)
 * [License](./LICENSE.md)
 
@@ -72,3 +71,11 @@ I also love MPlayer, but it's a bit unfriendly sometimes.
 programs like CMus and MOC and command-line clients like MPlayer and MPV. Most
 of the time I don't need playlists, streaming, remote control, or other
 features; I just want to play audio.
+
+### TODO
+
+* Fix jumping tracks when changing selection in the middle of playing
+* File browsing above cwd
+* Improve UI:
+  * Fix progress bar jump at beginning of playback
+  * Fix progress bar not showing up depending on size of terminal

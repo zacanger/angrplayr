@@ -48,15 +48,15 @@
     "blessed": "0.1.81",
     "mime": "2.3.1",
     "mplayer": "2.1.0",
-    "music-metadata": "0.10.2",
-    "react": "16.3.2",
+    "music-metadata": "2.0.3",
+    "react": "16.4.1",
     "react-blessed": "0.2.1",
     "react-blessed-contrib": "0.2.1",
-    "zeelib": "6.2.0"
+    "zeelib": "7.0.3"
   },
   "devDependencies": {
     "babel-cli": "6.26.0",
-    "babel-core": "6.26.0",
+    "babel-core": "6.26.3",
     "babel-eslint": "8.2.3",
     "babel-plugin-transform-class-properties": "6.24.1",
     "babel-plugin-transform-export-extensions": "6.22.0",
@@ -65,16 +65,16 @@
     "babel-preset-react": "6.24.1",
     "babel-tape-runner": "2.0.1",
     "eslint": "4.19.1",
-    "eslint-config-zacanger": "3.1.1",
+    "eslint-config-zacanger": "3.1.4",
     "eslint-plugin-babel": "5.1.0",
-    "eslint-plugin-import": "2.11.0",
+    "eslint-plugin-import": "2.12.0",
     "eslint-plugin-node": "6.0.1",
-    "eslint-plugin-promise": "3.7.0",
-    "eslint-plugin-react": "7.7.0",
+    "eslint-plugin-promise": "3.8.0",
+    "eslint-plugin-react": "7.9.1",
     "eslint-plugin-unicorn": "4.0.3",
-    "nyc": "11.7.1",
-    "tap-spec": "4.1.1",
-    "tape": "4.9.0"
+    "nyc": "12.0.2",
+    "tap-spec": "5.0.0",
+    "tape": "4.9.1"
   },
   "engines": {
     "node": ">=6.0.0"
