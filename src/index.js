@@ -16,10 +16,13 @@ import {
   readdir
 } from './util'
 
-let userConfig = {}
-try {
-  userConfig = require(configPath)
-} catch (_) { }
+const userConfig = (() => {
+  try {
+    return require(configPath)
+  } catch (_) {
+    return {}
+  }
+})()
 
 const volPercent = 5
 
