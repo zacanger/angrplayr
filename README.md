@@ -72,6 +72,12 @@ programs like CMus and MOC and command-line clients like MPlayer and MPV. Most
 of the time I don't need playlists, streaming, remote control, or other
 features; I just want to play audio.
 
+### Patreon
+
+This project is sponsored on [Patreon](https://www.patreon.com/zacanger) by:
+
+* [Keeley Hammond](https://github.com/VerteDinde)
+
 ### TODO
 
 * Fix jumping tracks when changing selection in the middle of playing
