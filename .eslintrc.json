@@ -2,6 +2,7 @@
   "root": true,
   "extends": "eslint-config-zacanger",
   "rules": {
-    "react/prop-types": 0
+    "react/prop-types": 0,
+    "node/no-unsupported-features/es-syntax": 0
   }
 }

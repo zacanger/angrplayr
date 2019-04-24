@@ -1,7 +1,5 @@
 # angrplayr
 
-**Unmaintained**
-
 A music player for the console, in Node.
 
 ![screenshot](/screenshot.png?raw=true)

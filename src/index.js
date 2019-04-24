@@ -39,11 +39,11 @@ const explorer = {
 }
 
 const loadChildren = (self, cb) => {
-  let result = {}
+  const result = {}
   try {
-    let selfPath = self.getPath(self)
+    const selfPath = self.getPath(self)
     // List files in this directory
-    let children = readdir(selfPath + '/')
+    const children = readdir(selfPath + '/')
       .filter(userConfig.showHiddenFiles ? id : isNotHidden)
 
     // childrenContent is a property filled with self.children() result
