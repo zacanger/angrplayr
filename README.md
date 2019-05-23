@@ -76,7 +76,7 @@ features; I just want to play audio.
 
 This project is sponsored on [Patreon](https://www.patreon.com/zacanger) by:
 
-* [Keeley Hammond](https://github.com/VerteDinde)
+* Keeley Hammond
 
 ### TODO
 
