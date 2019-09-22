@@ -4,7 +4,6 @@ import React, { Component } from 'react'
 import blessed from 'blessed'
 import { render } from 'react-blessed'
 import { Grid, Tree, Gauge } from 'react-blessed-contrib'
-import exit from 'zeelib/lib/exit'
 import id from 'zeelib/lib/id'
 import {
   configPath,
@@ -13,7 +12,7 @@ import {
   isAudioFile,
   isDirectory,
   isNotHidden,
-  readdir
+  readdir,
 } from './util'
 
 const userConfig = (() => {
@@ -35,7 +34,7 @@ const explorer = {
     // Otherwise get the parent node path and add this node name
     !self.parent
       ? process.cwd()
-      : self.parent.getPath(self.parent) + '/' + self.name
+      : self.parent.getPath(self.parent) + '/' + self.name,
 }
 
 const loadChildren = (self, cb) => {
@@ -43,12 +42,15 @@ const loadChildren = (self, cb) => {
   try {
     const selfPath = self.getPath(self)
     // List files in this directory
-    const children = readdir(selfPath + '/')
-      .filter(userConfig.showHiddenFiles ? id : isNotHidden)
+    const children = readdir(selfPath + '/').filter(
+      userConfig.showHiddenFiles ? id : isNotHidden
+    )
 
     // childrenContent is a property filled with self.children() result
     // on tree generation (tree.setData() call)
-    for (let child in children) { // eslint-disable-line guard-for-in
+    // eslint-disable-next-line guard-for-in
+    for (let child in children) {
+      // eslint-disable-line guard-for-in
       child = children[child]
       const completePath = selfPath + '/' + child
       if (isDirectory(completePath)) {
@@ -57,14 +59,14 @@ const loadChildren = (self, cb) => {
           name: child,
           getPath: self.getPath,
           extended: false,
-          children: { __placeholder__: { name: 'Loading...' } }
+          children: { __placeholder__: { name: 'Loading...' } },
         }
       } else {
         // Otherwise children is not set (you can also set it to "{}" or "null" if you want)
         result[child] = {
           name: child,
           getPath: self.getPath,
-          extended: false
+          extended: false,
         }
       }
     }
@@ -75,7 +77,7 @@ const loadChildren = (self, cb) => {
 }
 
 class App extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.state = {
@@ -87,23 +89,23 @@ class App extends Component {
       paused: false,
       position: 0,
       progress: 0,
-      volume: 50
+      volume: 50,
     }
 
     this.player = new MPlayer()
     this.player.on('stop', this.playNext)
   }
 
-  componentDidMount () {
+  componentDidMount() {
     const { screen } = this.props
 
     // set up key handlers
-    screen.key([ 'q', 'C-c' ], this.quit)
-    screen.key([ 'p' ], this.togglePause)
-    screen.key([ ',' ], this.volumeDown)
-    screen.key([ '.' ], this.volumeUp)
-    screen.key([ ';' ], this.seekBack)
-    screen.key([ '\'' ], this.seekForward)
+    screen.key(['q', 'C-c'], this.quit)
+    screen.key(['p'], this.togglePause)
+    screen.key([','], this.volumeDown)
+    screen.key(['.'], this.volumeUp)
+    screen.key([';'], this.seekBack)
+    screen.key(["'"], this.seekForward)
 
     // screen.key([ 'b' ], this.prev)
     // screen.key([ 'n' ], this.next)
@@ -142,7 +144,7 @@ class App extends Component {
       progress: 0,
       position: 0,
       duration: 0,
-      intervalId: null
+      intervalId: null,
     })
   }
 
@@ -163,14 +165,14 @@ class App extends Component {
         const progress = getPercent(duration, parseFloat(p))
         return {
           position: p,
-          progress
+          progress,
         }
       })
     }
   }
 
   quit = () => {
-    exit()
+    process.exit()
   }
 
   togglePause = () => {
@@ -206,18 +208,17 @@ class App extends Component {
   }
 
   playTrack = (p) => {
-    parseFile(p, { duration: true })
-      .then(({ format, common }) => {
-        this.player.openFile(p)
-        this.player.volume(this.state.volume)
-        const intervalId = setInterval(this.updatePosition, 1000)
-        this.setState({
-          filename: getDisplayName(p, common),
-          duration: format.duration,
-          fullPath: p,
-          intervalId
-        })
+    parseFile(p, { duration: true }).then(({ format, common }) => {
+      this.player.openFile(p)
+      this.player.volume(this.state.volume)
+      const intervalId = setInterval(this.updatePosition, 1000)
+      this.setState({
+        filename: getDisplayName(p, common),
+        duration: format.duration,
+        fullPath: p,
+        intervalId,
       })
+    })
   }
 
   onSelect = (node) => {
@@ -234,7 +235,7 @@ class App extends Component {
     this[name] = ref
   }
 
-  render () {
+  render() {
     const { progress, filename } = this.state
 
     const gaugeProps = {
@@ -246,7 +247,7 @@ class App extends Component {
       fill: 'black',
       rowSpan: 1,
       colSpan: 1,
-      col: 0
+      col: 0,
     }
 
     const treeProps = {
@@ -258,19 +259,19 @@ class App extends Component {
       colSpan: 1,
       options: {
         style: {
-          text: 'green'
+          text: 'green',
         },
         template: {
-          lines: true
+          lines: true,
         },
         label: 'AngrPlayr',
-        onSelect: this.onSelect
-      }
+        onSelect: this.onSelect,
+      },
     }
 
     const gridProps = {
       rows: 6,
-      cols: 1
+      cols: 1,
     }
 
     return (

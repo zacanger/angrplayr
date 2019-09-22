@@ -5,7 +5,7 @@ import getHome from 'zeelib/lib/get-user-home'
 
 export const lstat = fs.lstatSync
 export const readdir = fs.readdirSync
-export const getPercent = (total, bit) => bit / total * 100
+export const getPercent = (total, bit) => (bit / total) * 100
 export const isAudio = (s) => /audio/i.test(mime.getType(s))
 export const isAudioFile = (file) => isFile(file) && isAudio(file)
 export const isDirectory = (path) => lstat(path).isDirectory()
@@ -13,9 +13,7 @@ export const isNotHidden = (file) => !file.startsWith('.')
 export const configPath = getHome() + '/.config/angrplayr.json'
 
 export const stripFileExt = (s = '') =>
-  s.includes('.') && isNotHidden(s)
-    ? s.substr(0, s.lastIndexOf('.'))
-    : s
+  s.includes('.') && isNotHidden(s) ? s.substr(0, s.lastIndexOf('.')) : s
 
 export const getDisplayName = (s, common = {}) => {
   const a = s.split('/')
