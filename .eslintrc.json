@@ -1,17 +1,26 @@
 {
   "root": true,
   "plugins": [
-    "jane"
+    "zacanger"
   ],
   "extends": [
-    "plugin:jane/recommended",
-    "plugin:jane/react",
-    "plugin:jane/prettier"
+    "plugin:zacanger/recommended",
+    "plugin:zacanger/react",
+    "plugin:zacanger/prettier"
   ],
   "env": {
     "node": true
   },
   "rules": {
+    "fp/no-nil": 0,
+    "fp/no-class": 0,
+    "fp/no-this": 0,
+    "@typescript-eslint/no-empty-function": 0,
+    "fp/no-mutation": 0,
+    "fp/no-unused-expression": 0,
+    "fp/no-mutating-methods": 0,
+    "fp/no-let": 0,
+    "fp/no-loops": 0,
     "react/prop-types": 0,
     "node/no-unsupported-features/es-syntax": 0,
     "node/no-unpublished-import": 0
